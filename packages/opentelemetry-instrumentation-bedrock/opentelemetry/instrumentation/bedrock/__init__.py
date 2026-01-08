@@ -109,7 +109,7 @@ _BEDROCK_CONVERSE_SPAN_NAME = "bedrock.converse"
 
 
 def is_metrics_enabled() -> bool:
-    return (os.getenv("ANYWAY_METRICS_ENABLED") or "true").lower() == "true"
+    return (os.getenv("TRACELOOP_METRICS_ENABLED") or "true").lower() == "true"
 
 
 def _with_tracer_wrapper(func):

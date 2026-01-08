@@ -215,12 +215,12 @@ class OpenLLMetrySpanHandler(BaseSpanHandler[SpanHolder]):
         )
         token = context_api.attach(current_context)
 
-        span.set_attribute(SpanAttributes.ANYWAY_SPAN_KIND, kind)
-        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, span_name)
+        span.set_attribute(SpanAttributes.TRACELOOP_SPAN_KIND, kind)
+        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, span_name)
         try:
             if should_send_prompts():
                 span.set_attribute(
-                    SpanAttributes.ANYWAY_ENTITY_INPUT,
+                    SpanAttributes.TRACELOOP_ENTITY_INPUT,
                     json.dumps(bound_args.arguments, cls=JSONEncoder),
                 )
         except Exception:
@@ -247,7 +247,7 @@ class OpenLLMetrySpanHandler(BaseSpanHandler[SpanHolder]):
                 del output["source_nodes"]
             if should_send_prompts():
                 span_holder.otel_span.set_attribute(
-                    SpanAttributes.ANYWAY_ENTITY_OUTPUT,
+                    SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
                     json.dumps(output, cls=JSONEncoder),
                 )
         except Exception:

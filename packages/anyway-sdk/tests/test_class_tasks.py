@@ -17,16 +17,16 @@ def test_instance_method_task(exporter):
     assert [span.name for span in spans] == ["instance_method_task.task"]
 
     task_span = spans[0]
-    assert json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]) == {
         "args": ["TestService", "test data"],
         "kwargs": {},
     }
     assert (
-        json.loads(task_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_OUTPUT))
+        json.loads(task_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT))
         == result
     )
     assert (
-        task_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME]
+        task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME]
         == "instance_method_task"
     )
 
@@ -44,15 +44,15 @@ def test_class_decorator_task(exporter):
     assert [span.name for span in spans] == ["class_decorator_task.task"]
 
     task_span = spans[0]
-    assert json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]) == {
         "args": ["TestService", "test data"],
         "kwargs": {},
     }
     assert (
-        json.loads(task_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_OUTPUT))
+        json.loads(task_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT))
         == result
     )
     assert (
-        task_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME]
+        task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME]
         == "class_decorator_task"
     )

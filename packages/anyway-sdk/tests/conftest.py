@@ -147,7 +147,7 @@ def exporter_with_no_metrics():
         _trace_wrapper_instance = TracerWrapper.instance
         del TracerWrapper.instance
 
-    os.environ["ANYWAY_METRICS_ENABLED"] = "false"
+    os.environ["TRACELOOP_METRICS_ENABLED"] = "false"
 
     exporter = InMemorySpanExporter()
 
@@ -161,7 +161,7 @@ def exporter_with_no_metrics():
     # Restore singleton if any
     if _trace_wrapper_instance:
         TracerWrapper.instance = _trace_wrapper_instance
-        os.environ["ANYWAY_METRICS_ENABLED"] = "true"
+        os.environ["TRACELOOP_METRICS_ENABLED"] = "true"
 
 
 @pytest.fixture
@@ -226,8 +226,8 @@ def exporters_with_multiple_span_processors():
 @pytest.fixture
 def datasets():
     """Create a Datasets instance with HTTP client for VCR recording/playback"""
-    api_key = os.environ.get("ANYWAY_API_KEY", "fake-key-for-vcr-playback")
-    base_url = os.environ.get("ANYWAY_BASE_URL", "https://api-staging.traceloop.com")
+    api_key = os.environ.get("TRACELOOP_API_KEY", "fake-key-for-vcr-playback")
+    base_url = os.environ.get("TRACELOOP_BASE_URL", "https://api-staging.traceloop.com")
 
     http = HTTPClient(base_url=base_url, api_key=api_key, version="1.0.0")
     return Datasets(http)

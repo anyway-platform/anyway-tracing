@@ -294,7 +294,7 @@ def test_openai(instrument_legacy, span_exporter, log_exporter):
         span for span in spans if span.name == "RunnableSequence.workflow"
     )
     output = json.loads(
-        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
+        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
     )
     # Validate the completion content via workflow output
     assert output["outputs"]["kwargs"]["content"] == response.content
@@ -483,7 +483,7 @@ def test_openai_functions(instrument_legacy, span_exporter, log_exporter):
         span for span in spans if span.name == "RunnableSequence.workflow"
     )
     output = json.loads(
-        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
+        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
     )
     # Validate the tool call via workflow output
     assert output["outputs"] == response
@@ -674,7 +674,7 @@ def test_anthropic(instrument_legacy, span_exporter, log_exporter):
         == "msg_017fMG9SRDFTBhcD1ibtN1nK"
     )
     output = json.loads(
-        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
+        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
     )
     # We need to remove the id from the output because it is random
     assert {k: v for k, v in output["outputs"]["kwargs"].items() if k != "id"} == {
@@ -870,7 +870,7 @@ def test_bedrock(instrument_legacy, span_exporter, log_exporter):
     assert bedrock_span.attributes[GenAIAttributes.GEN_AI_USAGE_OUTPUT_TOKENS] == 27
     assert bedrock_span.attributes[SpanAttributes.LLM_USAGE_TOTAL_TOKENS] == 43
     output = json.loads(
-        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
+        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
     )
     # We need to remove the id from the output because it is random
     assert {k: v for k, v in output["outputs"]["kwargs"].items() if k != "id"} == {

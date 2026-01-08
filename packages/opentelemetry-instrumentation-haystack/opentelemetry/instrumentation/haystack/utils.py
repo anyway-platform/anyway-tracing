@@ -20,7 +20,7 @@ class EnhancedJSONEncoder(json.JSONEncoder):
 
 def should_send_prompts():
     return (
-        os.getenv("ANYWAY_TRACE_CONTENT") or "true"
+        os.getenv("TRACELOOP_TRACE_CONTENT") or "true"
     ).lower() == "true" or context_api.get_value("override_enable_content_tracing")
 
 
@@ -58,7 +58,7 @@ def process_request(span, args, kwargs):
         args_to_serialize = [arg for arg in args if not isinstance(arg, dict)]
         input_entity = {"args": args_to_serialize, "kwargs": kwargs_to_serialize}
         span.set_attribute(
-            SpanAttributes.ANYWAY_ENTITY_INPUT,
+            SpanAttributes.TRACELOOP_ENTITY_INPUT,
             json.dumps(input_entity, cls=EnhancedJSONEncoder),
         )
 
@@ -67,7 +67,7 @@ def process_request(span, args, kwargs):
 def process_response(span, response):
     if should_send_prompts():
         span.set_attribute(
-            SpanAttributes.ANYWAY_ENTITY_OUTPUT,
+            SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
             json.dumps(response, cls=EnhancedJSONEncoder),
         )
 

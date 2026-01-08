@@ -7,7 +7,7 @@ from anyway.sdk.decorators import workflow, task
 
 Traceloop.init(
     app_name="sample-app",
-    api_key=os.environ.get("ANYWAY_API_KEY"),
+    api_key=os.environ.get("TRACELOOP_API_KEY"),
 )
 
 api_key = os.environ.get("ANTHROPIC_API_KEY")

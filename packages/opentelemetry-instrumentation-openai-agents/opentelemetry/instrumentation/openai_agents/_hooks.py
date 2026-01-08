@@ -45,7 +45,7 @@ class OpenTelemetryTracingProcessor(TracingProcessor):
             "Agent Workflow",
             kind=SpanKind.CLIENT,
             attributes={
-                SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.WORKFLOW.value,
+                SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.WORKFLOW.value,
                 "gen_ai.system": "openai_agents",
                 "gen_ai.workflow.name": "Agent Workflow"
             }
@@ -94,7 +94,7 @@ class OpenTelemetryTracingProcessor(TracingProcessor):
                     handoff_parent = parent_agent_name
 
             attributes = {
-                SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
+                SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
                 GenAIAttributes.GEN_AI_AGENT_NAME: agent_name,
                 "gen_ai.system": "openai_agents"
             }
@@ -138,7 +138,7 @@ class OpenTelemetryTracingProcessor(TracingProcessor):
                 parent_context = set_span_in_context(from_agent_span)
 
             handoff_attributes = {
-                SpanAttributes.ANYWAY_SPAN_KIND: "handoff",
+                SpanAttributes.TRACELOOP_SPAN_KIND: "handoff",
                 "gen_ai.system": "openai_agents"
             }
 
@@ -163,7 +163,7 @@ class OpenTelemetryTracingProcessor(TracingProcessor):
                 parent_context = set_span_in_context(current_agent_span)
 
             tool_attributes = {
-                SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.TOOL.value,
+                SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.TOOL.value,
                 "gen_ai.tool.name": tool_name,
                 "gen_ai.system": "openai_agents",
                 f"{GenAIAttributes.GEN_AI_COMPLETION}.tool.name": tool_name,

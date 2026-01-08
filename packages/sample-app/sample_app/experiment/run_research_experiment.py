@@ -16,8 +16,8 @@ from anyway.sdk.experiment.model import RunInGithubResponse
 # Initialize Traceloop client
 client = Traceloop.init(
     app_name="research-experiment-ci-cd",
-    api_key=os.getenv("ANYWAY_API_KEY"),
-    api_endpoint=os.getenv("ANYWAY_BASE_URL"),
+    api_key=os.getenv("TRACELOOP_API_KEY"),
+    api_endpoint=os.getenv("TRACELOOP_BASE_URL"),
 )
 
 

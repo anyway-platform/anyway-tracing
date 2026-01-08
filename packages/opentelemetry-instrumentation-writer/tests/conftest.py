@@ -17,7 +17,7 @@ from opentelemetry.sdk.trace.export.in_memory_span_exporter import \
 from writerai import AsyncWriter, Writer
 
 from opentelemetry.instrumentation.writer import WriterInstrumentor
-from opentelemetry.instrumentation.writer.utils import ANYWAY_TRACE_CONTENT
+from opentelemetry.instrumentation.writer.utils import TRACELOOP_TRACE_CONTENT
 
 if "WRITER_API_KEY" not in os.environ:
     os.environ["WRITER_API_KEY"] = "test_api_key"
@@ -92,7 +92,7 @@ def instrument_legacy(reader, tracer_provider, meter_provider):
 def instrument_with_content(
     reader, tracer_provider, logger_provider, meter_provider
 ):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "True"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "True"})
 
     instrumentor = WriterInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -103,7 +103,7 @@ def instrument_with_content(
 
     yield instrumentor
 
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
     instrumentor.uninstrument()
 
 
@@ -111,7 +111,7 @@ def instrument_with_content(
 def instrument_with_no_content(
     reader, tracer_provider, logger_provider, meter_provider
 ):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "False"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "False"})
 
     instrumentor = WriterInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -122,5 +122,5 @@ def instrument_with_no_content(
 
     yield instrumentor
 
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
     instrumentor.uninstrument()

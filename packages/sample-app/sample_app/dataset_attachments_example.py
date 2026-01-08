@@ -331,7 +331,7 @@ def main():
     print("=" * 60)
 
     # Set your API key
-    # os.environ["ANYWAY_API_KEY"] = "your-api-key-here"
+    # os.environ["TRACELOOP_API_KEY"] = "your-api-key-here"
 
     # Note: These examples use mock data and won't actually upload to S3
     # In production, real files would be uploaded to S3 storage
@@ -349,7 +349,7 @@ def main():
 
     except Exception as e:
         print(f"\nError: {e}")
-        print("Make sure to set ANYWAY_API_KEY environment variable")
+        print("Make sure to set TRACELOOP_API_KEY environment variable")
 
 
 if __name__ == "__main__":

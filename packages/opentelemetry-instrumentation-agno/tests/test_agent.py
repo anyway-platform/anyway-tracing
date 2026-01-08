@@ -27,10 +27,10 @@ def test_agent_run_basic(instrument, span_exporter, reader):
     assert agent_span.attributes.get(GenAIAttributes.GEN_AI_AGENT_NAME) == "TestAgent"
     assert agent_span.attributes.get(GenAIAttributes.GEN_AI_REQUEST_MODEL) == "gpt-4o-mini"
 
-    prompt_content = agent_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_INPUT)
+    prompt_content = agent_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_INPUT)
     assert prompt_content == "What is 2 + 2?"
 
-    completion_content = agent_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_OUTPUT)
+    completion_content = agent_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT)
     assert completion_content is not None
 
 
@@ -54,7 +54,7 @@ async def test_agent_arun_basic(instrument, span_exporter, reader):
     assert agent_span.attributes.get(GenAIAttributes.GEN_AI_SYSTEM) == "agno"
     assert agent_span.attributes.get(GenAIAttributes.GEN_AI_AGENT_NAME) == "AsyncTestAgent"
 
-    prompt_content = agent_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_INPUT)
+    prompt_content = agent_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_INPUT)
     assert "capital of France" in prompt_content
 
 
@@ -87,7 +87,7 @@ def test_agent_with_tools(instrument, span_exporter, reader):
     # Tool spans may or may not be present depending on whether the agent actually calls the tool
     # so we just check that if they exist, they have the right attributes
     for tool_span in tool_spans:
-        assert tool_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_NAME) == "add_numbers"
+        assert tool_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_NAME) == "add_numbers"
         assert tool_span.attributes.get(GenAIAttributes.GEN_AI_SYSTEM) == "agno"
 
 
@@ -143,7 +143,7 @@ def test_agent_run_streaming(instrument, span_exporter, reader):
     assert agent_span.attributes.get(GenAIAttributes.GEN_AI_AGENT_NAME) == "StreamAgent"
     assert agent_span.attributes.get(GenAIAttributes.GEN_AI_REQUEST_MODEL) == "gpt-4o-mini"
 
-    prompt_content = agent_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_INPUT)
+    prompt_content = agent_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_INPUT)
     assert "10 + 5" in prompt_content
 
 
@@ -178,7 +178,7 @@ def test_agent_run_streaming_with_tools(instrument, span_exporter, reader):
 
     tool_spans = [s for s in spans if s.name == "multiply.tool"]
     for tool_span in tool_spans:
-        assert tool_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_NAME) == "multiply"
+        assert tool_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_NAME) == "multiply"
         assert tool_span.attributes.get(GenAIAttributes.GEN_AI_SYSTEM) == "agno"
 
 
@@ -207,7 +207,7 @@ async def test_agent_arun_streaming(instrument, span_exporter, reader):
     assert agent_span.attributes.get(GenAIAttributes.GEN_AI_AGENT_NAME) == "AsyncStreamAgent"
     assert agent_span.attributes.get(GenAIAttributes.GEN_AI_REQUEST_MODEL) == "gpt-4o-mini"
 
-    prompt_content = agent_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_INPUT)
+    prompt_content = agent_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_INPUT)
     assert "10 + 5" in prompt_content
 
 
@@ -243,5 +243,5 @@ async def test_agent_arun_streaming_with_tools(instrument, span_exporter, reader
 
     tool_spans = [s for s in spans if s.name == "multiply.tool"]
     for tool_span in tool_spans:
-        assert tool_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_NAME) == "multiply"
+        assert tool_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_NAME) == "multiply"
         assert tool_span.attributes.get(GenAIAttributes.GEN_AI_SYSTEM) == "agno"

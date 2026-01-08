@@ -10,9 +10,9 @@ from anyway.sdk.decorators import workflow, task
 
 @pytest.fixture(autouse=True)
 def disable_trace_content():
-    os.environ["ANYWAY_TRACE_CONTENT"] = "false"
+    os.environ["TRACELOOP_TRACE_CONTENT"] = "false"
     yield
-    os.environ["ANYWAY_TRACE_CONTENT"] = "true"
+    os.environ["TRACELOOP_TRACE_CONTENT"] = "true"
 
 
 @pytest.fixture

@@ -28,25 +28,25 @@ def test_association_properties(exporter):
     some_workflow_span = spans[1]
     assert (
         some_workflow_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
         ]
         == 1
     )
     assert (
         some_workflow_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_name"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_name"
         ]
         == "John Doe"
     )
     assert (
         some_task_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
         ]
         == 1
     )
     assert (
         some_task_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_name"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_name"
         ]
         == "John Doe"
     )
@@ -68,7 +68,7 @@ def test_association_properties_within_workflow(exporter):
     some_workflow_span = spans[0]
     assert (
         some_workflow_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
         ]
         == 15
     )
@@ -103,37 +103,37 @@ def test_langchain_association_properties(exporter):
 
     assert (
         workflow_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
         ]
         == "1234"
     )
     assert (
         workflow_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
         ]
         == 456
     )
     assert (
         chat_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
         ]
         == "1234"
     )
     assert (
         chat_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
         ]
         == 456
     )
     assert (
         prompt_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
         ]
         == "1234"
     )
     assert (
         prompt_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
         ]
         == 456
     )
@@ -175,55 +175,55 @@ def test_langchain_and_external_association_properties(exporter):
 
     assert (
         workflow_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
         ]
         == "1234"
     )
     assert (
         workflow_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
         ]
         == 456
     )
     assert (
         workflow_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.workspace_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.workspace_id"
         ]
         == "789"
     )
     assert (
         chat_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
         ]
         == "1234"
     )
     assert (
         chat_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
         ]
         == 456
     )
     assert (
         chat_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.workspace_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.workspace_id"
         ]
         == "789"
     )
     assert (
         prompt_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
         ]
         == "1234"
     )
     assert (
         prompt_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
         ]
         == 456
     )
     assert (
         prompt_span.attributes[
-            f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.workspace_id"
+            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.workspace_id"
         ]
         == "789"
     )

@@ -56,16 +56,16 @@ def test_simple_workflow(exporter, openai_client):
 
     workflow_span = next(span for span in spans if span.name == "pirate_joke_generator.workflow")
     task_span = next(span for span in spans if span.name == "something_creator.task")
-    assert json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]) == {
         "args": ["joke"],
         "kwargs": {"subject": "OpenTelemetry"},
     }
 
-    assert json.loads(task_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_OUTPUT)) == joke
+    assert json.loads(task_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT)) == joke
     assert task_span.parent.span_id == workflow_span.context.span_id
-    assert workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME] == "pirate_joke_generator"
-    assert workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_VERSION] == 1
-    assert task_span.attributes[SpanAttributes.ANYWAY_ENTITY_VERSION] == 2
+    assert workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "pirate_joke_generator"
+    assert workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_VERSION] == 1
+    assert task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_VERSION] == 2
 
 
 @pytest.mark.vcr
@@ -102,16 +102,16 @@ async def test_simple_aworkflow(exporter, async_openai_client):
 
     workflow_span = next(span for span in spans if span.name == "pirate_joke_generator.workflow")
     task_span = next(span for span in spans if span.name == "something_creator.task")
-    assert json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]) == {
         "args": ["joke"],
         "kwargs": {"subject": "OpenTelemetry"},
     }
 
-    assert json.loads(task_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_OUTPUT)) == joke
+    assert json.loads(task_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT)) == joke
     assert task_span.parent.span_id == workflow_span.context.span_id
-    assert workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME] == "pirate_joke_generator"
-    assert workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_VERSION] == 1
-    assert task_span.attributes[SpanAttributes.ANYWAY_ENTITY_VERSION] == 2
+    assert workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "pirate_joke_generator"
+    assert workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_VERSION] == 1
+    assert task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_VERSION] == 2
 
 
 @pytest.mark.vcr
@@ -177,11 +177,11 @@ def test_unrelated_entities(exporter):
     workflow_1_span = spans[0]
     task_1_span = spans[1]
 
-    assert workflow_1_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME] == "workflow_1"
-    assert workflow_1_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == "workflow"
+    assert workflow_1_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "workflow_1"
+    assert workflow_1_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "workflow"
 
-    assert task_1_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME] == "task_1"
-    assert task_1_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == "task"
+    assert task_1_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "task_1"
+    assert task_1_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "task"
     assert task_1_span.parent is None
 
 
@@ -485,14 +485,14 @@ def test_dataclass_serialization_workflow(exporter):
     task_span = spans[0]
     workflow_span = spans[1]
 
-    assert json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]) == {
         "args": [{"field1": "value1", "field2": 123}],
         "kwargs": {},
     }
-    assert json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]) == {
         "field1": "value1",
         "field2": 123,
     }
     assert task_span.parent.span_id == workflow_span.context.span_id
-    assert workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME] == "dataclass_workflow"
-    assert task_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME] == "dataclass_task"
+    assert workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "dataclass_workflow"
+    assert task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "dataclass_task"

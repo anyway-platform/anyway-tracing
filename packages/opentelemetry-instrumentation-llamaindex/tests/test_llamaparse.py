@@ -23,8 +23,8 @@ def test_llamaparse_load_data_instrumentation(instrument_legacy, span_exporter):
         if span.name == "llamaparse.task"
     )
 
-    assert llamaparse_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == TraceloopSpanKindValues.TASK.value
-    assert llamaparse_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME] == "llamaparse"
+    assert llamaparse_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == TraceloopSpanKindValues.TASK.value
+    assert llamaparse_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "llamaparse"
 
 
 @pytest.mark.skipif(
@@ -46,8 +46,8 @@ async def test_llamaparse_aload_data_instrumentation(instrument_legacy, span_exp
         if span.name == "llamaparse.task"
     )
 
-    assert llamaparse_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == TraceloopSpanKindValues.TASK.value
-    assert llamaparse_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME] == "llamaparse"
+    assert llamaparse_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == TraceloopSpanKindValues.TASK.value
+    assert llamaparse_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "llamaparse"
 
 
 @pytest.mark.skipif(

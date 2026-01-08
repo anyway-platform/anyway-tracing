@@ -27,7 +27,7 @@ def test_task_io_serialization_with_langchain(exporter):
     assert len(task_spans) == 1
 
     task_span = task_spans[0]
-    assert json.loads(task_span.attributes.get(SpanAttributes.ANYWAY_ENTITY_OUTPUT))["kwargs"]["content"] == "Yes"
+    assert json.loads(task_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT))["kwargs"]["content"] == "Yes"
 
 
 def test_sync_task_error_handling(exporter):
@@ -144,11 +144,11 @@ def test_dataclass_serialization_task(exporter):
 
     task_span = spans[0]
 
-    assert json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]) == {
         "args": [{"field1": "value1", "field2": 123}],
         "kwargs": {},
     }
-    assert json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]) == {
         "field1": "value1",
         "field2": 123,
     }
@@ -172,12 +172,12 @@ def test_json_truncation_with_otel_limit(exporter, monkeypatch):
     task_span = spans[0]
 
     # Check that input was truncated
-    input_json = task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]
+    input_json = task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]
     assert len(input_json) == 50
     assert input_json.startswith('{"args": ["This is a very long input string that s')
 
     # Check that output was truncated
-    output_json = task_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
+    output_json = task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
     assert len(output_json) == 50
     assert output_json.startswith('"This is a very long output string that should def')
 
@@ -198,11 +198,11 @@ def test_json_no_truncation_without_otel_limit(exporter, monkeypatch):
     task_span = spans[0]
 
     # Check that input was not truncated
-    input_data = json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    input_data = json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert input_data["args"][0] == long_input
 
     # Check that output was not truncated
-    output_data = json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    output_data = json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert output_data == result
 
 
@@ -222,11 +222,11 @@ def test_json_truncation_with_invalid_otel_limit(exporter, monkeypatch):
     task_span = spans[0]
 
     # Check that input was not truncated (since invalid limit should be ignored)
-    input_data = json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    input_data = json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert input_data["args"][0] == test_input
 
     # Check that output was not truncated
-    output_data = json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    output_data = json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert output_data == result
 
 
@@ -248,11 +248,11 @@ async def test_async_json_truncation_with_otel_limit(exporter, monkeypatch):
     task_span = spans[0]
 
     # Check that input was truncated
-    input_json = task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]
+    input_json = task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]
     assert len(input_json) == 40
 
     # Check that output was truncated
-    output_json = task_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
+    output_json = task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
     assert len(output_json) == 40
 
 
@@ -272,9 +272,9 @@ def test_json_truncation_preserves_short_content(exporter, monkeypatch):
     task_span = spans[0]
 
     # Check that short input was preserved completely
-    input_data = json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    input_data = json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert input_data["args"][0] == short_input
 
     # Check that short output was preserved completely
-    output_data = json.loads(task_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    output_data = json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert output_data == result

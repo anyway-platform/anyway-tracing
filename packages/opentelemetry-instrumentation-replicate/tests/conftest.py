@@ -5,7 +5,7 @@ import os
 import pytest
 import replicate
 from opentelemetry.instrumentation.replicate import ReplicateInstrumentor
-from opentelemetry.instrumentation.replicate.utils import ANYWAY_TRACE_CONTENT
+from opentelemetry.instrumentation.replicate.utils import TRACELOOP_TRACE_CONTENT
 from opentelemetry.sdk._logs import LoggerProvider
 from opentelemetry.sdk._logs.export import (
     InMemoryLogExporter,
@@ -63,7 +63,7 @@ def instrument_legacy(tracer_provider):
 
 @pytest.fixture(scope="function")
 def instrument_with_content(tracer_provider, logger_provider):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "True"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "True"})
 
     instrumentor = ReplicateInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -74,12 +74,12 @@ def instrument_with_content(tracer_provider, logger_provider):
     yield instrumentor
 
     instrumentor.uninstrument()
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
 
 
 @pytest.fixture(scope="function")
 def instrument_with_no_content(tracer_provider, logger_provider):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "False"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "False"})
 
     instrumentor = ReplicateInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -90,7 +90,7 @@ def instrument_with_no_content(tracer_provider, logger_provider):
     yield instrumentor
 
     instrumentor.uninstrument()
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
 
 
 @pytest.fixture(scope="module")

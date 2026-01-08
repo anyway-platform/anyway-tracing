@@ -120,7 +120,7 @@ async def _ahandle_generator(span, ctx_token, res):
 
 def _should_send_prompts():
     return (
-        os.getenv("ANYWAY_TRACE_CONTENT") or "true"
+        os.getenv("TRACELOOP_TRACE_CONTENT") or "true"
     ).lower() == "true" or context_api.get_value("override_enable_content_tracing")
 
 
@@ -158,10 +158,10 @@ def _setup_span(entity_name, tlp_span_kind, version):
             entity_path = get_chained_entity_path(entity_name)
             set_entity_path(entity_path)
 
-        span.set_attribute(SpanAttributes.ANYWAY_SPAN_KIND, tlp_span_kind.value)
-        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, entity_name)
+        span.set_attribute(SpanAttributes.TRACELOOP_SPAN_KIND, tlp_span_kind.value)
+        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, entity_name)
         if version:
-            span.set_attribute(SpanAttributes.ANYWAY_ENTITY_VERSION, version)
+            span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_VERSION, version)
 
     return span, ctx, ctx_token
 
@@ -175,7 +175,7 @@ def _handle_span_input(span, args, kwargs, cls=None):
             )
             truncated_json = _truncate_json_if_needed(json_input)
             span.set_attribute(
-                SpanAttributes.ANYWAY_ENTITY_INPUT,
+                SpanAttributes.TRACELOOP_ENTITY_INPUT,
                 truncated_json,
             )
     except TypeError:
@@ -189,7 +189,7 @@ def _handle_span_output(span, res, cls=None):
             json_output = json.dumps(res, **({"cls": cls} if cls else {}))
             truncated_json = _truncate_json_if_needed(json_output)
             span.set_attribute(
-                SpanAttributes.ANYWAY_ENTITY_OUTPUT,
+                SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
                 truncated_json,
             )
     except TypeError:

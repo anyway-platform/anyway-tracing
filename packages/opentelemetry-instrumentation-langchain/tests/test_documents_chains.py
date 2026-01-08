@@ -57,10 +57,10 @@ def test_sequential_chain(instrument_legacy, span_exporter, log_exporter):
 
     stuff_span = next(span for span in spans if span.name == "stuff_chain.workflow")
 
-    data = json.loads(stuff_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    data = json.loads(stuff_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert data["inputs"].keys() == {"input_documents"}
     assert data["kwargs"]["name"] == "stuff_chain"
-    data = json.loads(stuff_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    data = json.loads(stuff_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert data["outputs"].keys() == {"output_text"}
 
     logs = log_exporter.get_finished_logs()

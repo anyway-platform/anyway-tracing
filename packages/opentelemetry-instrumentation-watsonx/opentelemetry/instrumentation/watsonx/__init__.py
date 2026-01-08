@@ -122,7 +122,7 @@ def _set_api_attributes(span):
 
 
 def is_metrics_enabled() -> bool:
-    return (os.getenv("ANYWAY_METRICS_ENABLED") or "true").lower() == "true"
+    return (os.getenv("TRACELOOP_METRICS_ENABLED") or "true").lower() == "true"
 
 
 def _set_input_attributes(span, args=None, kwargs=None):

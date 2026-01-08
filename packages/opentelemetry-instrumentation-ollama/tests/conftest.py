@@ -5,7 +5,7 @@ import os
 import ollama
 import pytest
 from opentelemetry.instrumentation.ollama import OllamaInstrumentor
-from opentelemetry.instrumentation.ollama.utils import ANYWAY_TRACE_CONTENT
+from opentelemetry.instrumentation.ollama.utils import TRACELOOP_TRACE_CONTENT
 from opentelemetry.sdk._logs import LoggerProvider
 from opentelemetry.sdk._logs.export import (
     InMemoryLogExporter,
@@ -93,7 +93,7 @@ def instrument_legacy(reader, tracer_provider, meter_provider):
 def instrument_with_content(
     reader, tracer_provider, logger_provider, meter_provider
 ):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "True"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "True"})
 
     instrumentor = OllamaInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -104,7 +104,7 @@ def instrument_with_content(
 
     yield instrumentor
 
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
     instrumentor.uninstrument()
 
 
@@ -112,7 +112,7 @@ def instrument_with_content(
 def instrument_with_no_content(
     reader, tracer_provider, logger_provider, meter_provider
 ):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "False"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "False"})
 
     instrumentor = OllamaInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -123,5 +123,5 @@ def instrument_with_no_content(
 
     yield instrumentor
 
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
     instrumentor.uninstrument()

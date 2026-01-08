@@ -121,7 +121,7 @@ async def test_fastmcp_instrumentor(span_exporter, tracer_provider) -> None:
         f"RequestStreamWriter spans should be removed, found {len(request_writer_spans)}"
     )
 
-    # Verify ANYWAY_WORKFLOW_NAME is set correctly on server spans
+    # Verify TRACELOOP_WORKFLOW_NAME is set correctly on server spans
     mcp_server_spans = [span for span in spans if span.name == 'mcp.server']
     assert len(mcp_server_spans) >= 1, (
         f"Expected at least 1 mcp.server span, found {len(mcp_server_spans)}"
@@ -133,7 +133,7 @@ async def test_fastmcp_instrumentor(span_exporter, tracer_provider) -> None:
             f"Expected workflow name 'test-server.mcp', got '{workflow_name}'"
         )
 
-    # Verify ANYWAY_WORKFLOW_NAME is also set on tool spans
+    # Verify TRACELOOP_WORKFLOW_NAME is also set on tool spans
     server_tool_spans = [span for span in spans if span.name == 'add_numbers.tool'
                          and span.attributes.get('traceloop.span.kind') == 'tool'
                          and 'traceloop.workflow.name' in span.attributes]

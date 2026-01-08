@@ -5,7 +5,7 @@ import os
 import pytest
 from mistralai import Mistral
 from opentelemetry.instrumentation.mistralai import MistralAiInstrumentor
-from opentelemetry.instrumentation.mistralai.utils import ANYWAY_TRACE_CONTENT
+from opentelemetry.instrumentation.mistralai.utils import TRACELOOP_TRACE_CONTENT
 from opentelemetry.sdk._logs import LoggerProvider
 from opentelemetry.sdk._logs.export import (
     InMemoryLogExporter,
@@ -68,7 +68,7 @@ def instrument_legacy(tracer_provider):
 
 @pytest.fixture(scope="function")
 def instrument_with_content(tracer_provider, logger_provider):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "True"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "True"})
 
     instrumentor = MistralAiInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -78,13 +78,13 @@ def instrument_with_content(tracer_provider, logger_provider):
 
     yield instrumentor
 
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
     instrumentor.uninstrument()
 
 
 @pytest.fixture(scope="function")
 def instrument_with_no_content(tracer_provider, logger_provider):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "False"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "False"})
 
     instrumentor = MistralAiInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -94,7 +94,7 @@ def instrument_with_no_content(tracer_provider, logger_provider):
 
     yield instrumentor
 
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
     instrumentor.uninstrument()
 
 

@@ -20,8 +20,8 @@ from anyway.sdk.prompts.client import PromptRegistryClient
 from anyway.sdk.tracing.content_allow_list import ContentAllowList
 from anyway.sdk.version import __version__
 
-MAX_RETRIES: int = int(os.getenv("ANYWAY_PROMPT_MANAGER_MAX_RETRIES") or 3)
-POLLING_INTERVAL: int = int(os.getenv("ANYWAY_PROMPT_MANAGER_POLLING_INTERVAL") or 5)
+MAX_RETRIES: int = int(os.getenv("TRACELOOP_PROMPT_MANAGER_MAX_RETRIES") or 3)
+POLLING_INTERVAL: int = int(os.getenv("TRACELOOP_PROMPT_MANAGER_POLLING_INTERVAL") or 5)
 
 
 class Fetcher:

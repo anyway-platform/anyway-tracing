@@ -5,7 +5,7 @@ import os
 import pytest
 from opentelemetry import trace
 from opentelemetry.instrumentation.watsonx import WatsonxInstrumentor
-from opentelemetry.instrumentation.watsonx.utils import ANYWAY_TRACE_CONTENT
+from opentelemetry.instrumentation.watsonx.utils import TRACELOOP_TRACE_CONTENT
 from opentelemetry.sdk._logs import LoggerProvider
 from opentelemetry.sdk._logs.export import (
     InMemoryLogExporter,
@@ -55,7 +55,7 @@ def fixture_logger_provider(log_exporter):
 
 @pytest.fixture(scope="function")
 def exporter_with_content(logger_provider):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "True"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "True"})
 
     exporter = InMemorySpanExporter()
     processor = SimpleSpanProcessor(exporter)
@@ -78,12 +78,12 @@ def exporter_with_content(logger_provider):
 
     yield exporter
 
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
 
 
 @pytest.fixture(scope="function")
 def exporter_with_no_content(logger_provider):
-    os.environ.update({ANYWAY_TRACE_CONTENT: "False"})
+    os.environ.update({TRACELOOP_TRACE_CONTENT: "False"})
 
     exporter = InMemorySpanExporter()
     processor = SimpleSpanProcessor(exporter)
@@ -106,7 +106,7 @@ def exporter_with_no_content(logger_provider):
 
     yield exporter
 
-    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
+    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
 
 
 @pytest.fixture(autouse=True)

@@ -163,7 +163,7 @@ class _AgentRunWrapper:
             try:
                 span.set_attribute(GenAIAttributes.GEN_AI_SYSTEM, "agno")
                 span.set_attribute(
-                    SpanAttributes.ANYWAY_SPAN_KIND,
+                    SpanAttributes.TRACELOOP_SPAN_KIND,
                     TraceloopSpanKindValues.AGENT.value,
                 )
 
@@ -179,7 +179,7 @@ class _AgentRunWrapper:
                 if args and should_send_prompts():
                     input_message = str(args[0])
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_ENTITY_INPUT, input_message
+                        SpanAttributes.TRACELOOP_ENTITY_INPUT, input_message
                     )
 
                 import time
@@ -212,7 +212,7 @@ class _AgentRunWrapper:
                 try:
                     span.set_attribute(GenAIAttributes.GEN_AI_SYSTEM, "agno")
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_SPAN_KIND,
+                        SpanAttributes.TRACELOOP_SPAN_KIND,
                         TraceloopSpanKindValues.AGENT.value,
                     )
 
@@ -228,7 +228,7 @@ class _AgentRunWrapper:
                     if args and should_send_prompts():
                         input_message = str(args[0])
                         span.set_attribute(
-                            SpanAttributes.ANYWAY_ENTITY_INPUT, input_message
+                            SpanAttributes.TRACELOOP_ENTITY_INPUT, input_message
                         )
 
                     import time
@@ -241,7 +241,7 @@ class _AgentRunWrapper:
 
                     if hasattr(result, "content") and should_send_prompts():
                         span.set_attribute(
-                            SpanAttributes.ANYWAY_ENTITY_OUTPUT, str(result.content)
+                            SpanAttributes.TRACELOOP_ENTITY_OUTPUT, str(result.content)
                         )
 
                     if hasattr(result, "run_id"):
@@ -270,7 +270,7 @@ class _AgentRunWrapper:
                         duration,
                         attributes={
                             GenAIAttributes.GEN_AI_SYSTEM: "agno",
-                            SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
+                            SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
                         },
                     )
 
@@ -312,7 +312,7 @@ class _AgentARunWrapper:
             try:
                 span.set_attribute(GenAIAttributes.GEN_AI_SYSTEM, "agno")
                 span.set_attribute(
-                    SpanAttributes.ANYWAY_SPAN_KIND,
+                    SpanAttributes.TRACELOOP_SPAN_KIND,
                     TraceloopSpanKindValues.AGENT.value,
                 )
 
@@ -328,7 +328,7 @@ class _AgentARunWrapper:
                 if args and should_send_prompts():
                     input_message = str(args[0])
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_ENTITY_INPUT, input_message
+                        SpanAttributes.TRACELOOP_ENTITY_INPUT, input_message
                     )
 
                 import time
@@ -362,7 +362,7 @@ class _AgentARunWrapper:
                     try:
                         span.set_attribute(GenAIAttributes.GEN_AI_SYSTEM, "agno")
                         span.set_attribute(
-                            SpanAttributes.ANYWAY_SPAN_KIND,
+                            SpanAttributes.TRACELOOP_SPAN_KIND,
                             TraceloopSpanKindValues.AGENT.value,
                         )
 
@@ -378,7 +378,7 @@ class _AgentARunWrapper:
                         if args and should_send_prompts():
                             input_message = str(args[0])
                             span.set_attribute(
-                                SpanAttributes.ANYWAY_ENTITY_INPUT, input_message
+                                SpanAttributes.TRACELOOP_ENTITY_INPUT, input_message
                             )
 
                         import time
@@ -391,7 +391,7 @@ class _AgentARunWrapper:
 
                         if hasattr(result, "content") and should_send_prompts():
                             span.set_attribute(
-                                SpanAttributes.ANYWAY_ENTITY_OUTPUT, str(result.content)
+                                SpanAttributes.TRACELOOP_ENTITY_OUTPUT, str(result.content)
                             )
 
                         if hasattr(result, "run_id"):
@@ -420,7 +420,7 @@ class _AgentARunWrapper:
                             duration,
                             attributes={
                                 GenAIAttributes.GEN_AI_SYSTEM: "agno",
-                                SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
+                                SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
                             },
                         )
 
@@ -460,7 +460,7 @@ class _TeamRunWrapper:
             try:
                 span.set_attribute(GenAIAttributes.GEN_AI_SYSTEM, "agno")
                 span.set_attribute(
-                    SpanAttributes.ANYWAY_SPAN_KIND,
+                    SpanAttributes.TRACELOOP_SPAN_KIND,
                     TraceloopSpanKindValues.WORKFLOW.value,
                 )
 
@@ -470,7 +470,7 @@ class _TeamRunWrapper:
                 if args and should_send_prompts():
                     input_message = str(args[0])
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_ENTITY_INPUT, input_message
+                        SpanAttributes.TRACELOOP_ENTITY_INPUT, input_message
                     )
 
                 import time
@@ -483,7 +483,7 @@ class _TeamRunWrapper:
 
                 if hasattr(result, "content") and should_send_prompts():
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_ENTITY_OUTPUT, str(result.content)
+                        SpanAttributes.TRACELOOP_ENTITY_OUTPUT, str(result.content)
                     )
 
                 if hasattr(result, "run_id"):
@@ -495,7 +495,7 @@ class _TeamRunWrapper:
                     duration,
                     attributes={
                         GenAIAttributes.GEN_AI_SYSTEM: "agno",
-                        SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.WORKFLOW.value,
+                        SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.WORKFLOW.value,
                     },
                 )
 
@@ -533,7 +533,7 @@ class _TeamARunWrapper:
             try:
                 span.set_attribute(GenAIAttributes.GEN_AI_SYSTEM, "agno")
                 span.set_attribute(
-                    SpanAttributes.ANYWAY_SPAN_KIND,
+                    SpanAttributes.TRACELOOP_SPAN_KIND,
                     TraceloopSpanKindValues.WORKFLOW.value,
                 )
 
@@ -543,7 +543,7 @@ class _TeamARunWrapper:
                 if args and should_send_prompts():
                     input_message = str(args[0])
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_ENTITY_INPUT, input_message
+                        SpanAttributes.TRACELOOP_ENTITY_INPUT, input_message
                     )
 
                 import time
@@ -556,7 +556,7 @@ class _TeamARunWrapper:
 
                 if hasattr(result, "content") and should_send_prompts():
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_ENTITY_OUTPUT, str(result.content)
+                        SpanAttributes.TRACELOOP_ENTITY_OUTPUT, str(result.content)
                     )
 
                 if hasattr(result, "run_id"):
@@ -568,7 +568,7 @@ class _TeamARunWrapper:
                     duration,
                     attributes={
                         GenAIAttributes.GEN_AI_SYSTEM: "agno",
-                        SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.WORKFLOW.value,
+                        SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.WORKFLOW.value,
                     },
                 )
 

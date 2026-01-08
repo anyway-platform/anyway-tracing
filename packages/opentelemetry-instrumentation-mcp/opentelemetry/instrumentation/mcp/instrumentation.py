@@ -218,9 +218,9 @@ class McpInstrumentor(BaseInstrumentor):
             # Start a root span for the MCP client session and make it current
             span_context_manager = tracer.start_as_current_span("mcp.client.session")
             span = span_context_manager.__enter__()
-            span.set_attribute(SpanAttributes.ANYWAY_SPAN_KIND, "session")
+            span.set_attribute(SpanAttributes.TRACELOOP_SPAN_KIND, "session")
             span.set_attribute(
-                SpanAttributes.ANYWAY_ENTITY_NAME, "mcp.client.session"
+                SpanAttributes.TRACELOOP_ENTITY_NAME, "mcp.client.session"
             )
 
             # Store the span context manager on the instance to properly exit it later
@@ -285,20 +285,20 @@ class McpInstrumentor(BaseInstrumentor):
         with tracer.start_as_current_span(span_name) as span:
             # Set tool-specific attributes
             span.set_attribute(
-                SpanAttributes.ANYWAY_SPAN_KIND, TraceloopSpanKindValues.TOOL.value
+                SpanAttributes.TRACELOOP_SPAN_KIND, TraceloopSpanKindValues.TOOL.value
             )
-            span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, entity_name)
+            span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, entity_name)
 
             # Add input
             clean_input = self._extract_clean_input(method, params)
             if clean_input:
                 try:
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_ENTITY_INPUT, json.dumps(clean_input)
+                        SpanAttributes.TRACELOOP_ENTITY_INPUT, json.dumps(clean_input)
                     )
                 except (TypeError, ValueError):
                     span.set_attribute(
-                        SpanAttributes.ANYWAY_ENTITY_INPUT, str(clean_input)
+                        SpanAttributes.TRACELOOP_ENTITY_INPUT, str(clean_input)
                     )
 
             return await self._execute_and_handle_result(
@@ -309,7 +309,7 @@ class McpInstrumentor(BaseInstrumentor):
         """Handle non-tool MCP methods with simple serialization"""
         with tracer.start_as_current_span(f"{method}.mcp") as span:
             span.set_attribute(
-                SpanAttributes.ANYWAY_ENTITY_INPUT, f"{serialize(args[0])}"
+                SpanAttributes.TRACELOOP_ENTITY_INPUT, f"{serialize(args[0])}"
             )
             return await self._execute_and_handle_result(
                 span, method, args, kwargs, wrapped, clean_output=False
@@ -327,17 +327,17 @@ class McpInstrumentor(BaseInstrumentor):
                 if clean_output_data:
                     try:
                         span.set_attribute(
-                            SpanAttributes.ANYWAY_ENTITY_OUTPUT,
+                            SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
                             json.dumps(clean_output_data),
                         )
                     except (TypeError, ValueError):
                         span.set_attribute(
-                            SpanAttributes.ANYWAY_ENTITY_OUTPUT,
+                            SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
                             str(clean_output_data),
                         )
             else:
                 span.set_attribute(
-                    SpanAttributes.ANYWAY_ENTITY_OUTPUT, serialize(result)
+                    SpanAttributes.TRACELOOP_ENTITY_OUTPUT, serialize(result)
                 )
             # Handle errors
             if hasattr(result, "isError") and result.isError:

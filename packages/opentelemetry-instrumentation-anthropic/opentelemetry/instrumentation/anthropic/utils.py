@@ -15,7 +15,7 @@ from opentelemetry.semconv._incubating.attributes import (
 GEN_AI_SYSTEM_ANTHROPIC = "anthropic"
 _PYDANTIC_VERSION = version("pydantic")
 
-ANYWAY_TRACE_CONTENT = "ANYWAY_TRACE_CONTENT"
+TRACELOOP_TRACE_CONTENT = "TRACELOOP_TRACE_CONTENT"
 
 
 def set_span_attribute(span, name, value):
@@ -27,7 +27,7 @@ def set_span_attribute(span, name, value):
 
 def should_send_prompts():
     return (
-        os.getenv(ANYWAY_TRACE_CONTENT) or "true"
+        os.getenv(TRACELOOP_TRACE_CONTENT) or "true"
     ).lower() == "true" or context_api.get_value("override_enable_content_tracing")
 
 

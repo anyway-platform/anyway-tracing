@@ -65,21 +65,21 @@ def test_sequential_chain(instrument_legacy, span_exporter, log_exporter):
     ]
     llm_spans = [span for span in spans if span.name == "OpenAI.completion"]
 
-    assert workflow_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == "workflow"
+    assert workflow_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "workflow"
     assert (
-        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME]
+        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME]
         == "SequentialChain"
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == "task"
+        span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "task"
         for span in task_spans
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_WORKFLOW_NAME] == "SequentialChain"
+        span.attributes[SpanAttributes.TRACELOOP_WORKFLOW_NAME] == "SequentialChain"
         for span in spans
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_ENTITY_PATH]
+        span.attributes[SpanAttributes.TRACELOOP_ENTITY_PATH]
         in ["synopsis", "LLMChain"]
         for span in llm_spans
     )
@@ -87,21 +87,21 @@ def test_sequential_chain(instrument_legacy, span_exporter, log_exporter):
     synopsis_span = next(span for span in spans if span.name == "synopsis.task")
     review_span = next(span for span in spans if span.name == "LLMChain.task")
 
-    data = json.loads(synopsis_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    data = json.loads(synopsis_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert data["inputs"] == {
         "title": "Tragedy at sunset on the beach",
         "era": "Victorian England",
     }
     assert data["kwargs"]["name"] == "synopsis"
-    data = json.loads(synopsis_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    data = json.loads(synopsis_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert data["outputs"].keys() == {
         "synopsis",
     }
 
-    data = json.loads(review_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    data = json.loads(review_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert data["inputs"].keys() == {"title", "era", "synopsis"}
     assert data["kwargs"]["name"] == "LLMChain"
-    data = json.loads(review_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    data = json.loads(review_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert data["outputs"].keys() == {
         "review",
     }
@@ -109,13 +109,13 @@ def test_sequential_chain(instrument_legacy, span_exporter, log_exporter):
     overall_span = next(
         span for span in spans if span.name == "SequentialChain.workflow"
     )
-    data = json.loads(overall_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    data = json.loads(overall_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert data["inputs"] == {
         "title": "Tragedy at sunset on the beach",
         "era": "Victorian England",
     }
     assert data["kwargs"]["name"] == "SequentialChain"
-    data = json.loads(overall_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    data = json.loads(overall_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert data["outputs"].keys() == {"synopsis", "review"}
 
     openai_span = next(span for span in spans if span.name == "OpenAI.completion")
@@ -189,21 +189,21 @@ def test_sequential_chain_with_events_with_content(
     ]
     llm_spans = [span for span in spans if span.name == "OpenAI.completion"]
 
-    assert workflow_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == "workflow"
+    assert workflow_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "workflow"
     assert (
-        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME]
+        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME]
         == "SequentialChain"
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == "task"
+        span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "task"
         for span in task_spans
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_WORKFLOW_NAME] == "SequentialChain"
+        span.attributes[SpanAttributes.TRACELOOP_WORKFLOW_NAME] == "SequentialChain"
         for span in spans
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_ENTITY_PATH]
+        span.attributes[SpanAttributes.TRACELOOP_ENTITY_PATH]
         in ["synopsis", "LLMChain"]
         for span in llm_spans
     )
@@ -310,21 +310,21 @@ def test_sequential_chain_with_events_with_no_content(
     ]
     llm_spans = [span for span in spans if span.name == "OpenAI.completion"]
 
-    assert workflow_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == "workflow"
+    assert workflow_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "workflow"
     assert (
-        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_NAME]
+        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME]
         == "SequentialChain"
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_SPAN_KIND] == "task"
+        span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "task"
         for span in task_spans
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_WORKFLOW_NAME] == "SequentialChain"
+        span.attributes[SpanAttributes.TRACELOOP_WORKFLOW_NAME] == "SequentialChain"
         for span in spans
     )
     assert all(
-        span.attributes[SpanAttributes.ANYWAY_ENTITY_PATH]
+        span.attributes[SpanAttributes.TRACELOOP_ENTITY_PATH]
         in ["synopsis", "LLMChain"]
         for span in llm_spans
     )
@@ -406,21 +406,21 @@ async def test_asequential_chain(instrument_legacy, span_exporter, log_exporter)
         span for span in spans if span.name == "LLMChain.task"
     ]
 
-    data = json.loads(synopsis_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    data = json.loads(synopsis_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert data["inputs"] == {
         "title": "Tragedy at sunset on the beach",
         "era": "Victorian England",
     }
     assert data["kwargs"]["name"] == "LLMChain"
-    data = json.loads(synopsis_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    data = json.loads(synopsis_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert data["outputs"].keys() == {
         "synopsis",
     }
 
-    data = json.loads(review_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    data = json.loads(review_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert data["inputs"].keys() == {"title", "era", "synopsis"}
     assert data["kwargs"]["name"] == "LLMChain"
-    data = json.loads(review_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    data = json.loads(review_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert data["outputs"].keys() == {
         "review",
     }
@@ -428,13 +428,13 @@ async def test_asequential_chain(instrument_legacy, span_exporter, log_exporter)
     overall_span = next(
         span for span in spans if span.name == "SequentialChain.workflow"
     )
-    data = json.loads(overall_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT])
+    data = json.loads(overall_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT])
     assert data["inputs"] == {
         "title": "Tragedy at sunset on the beach",
         "era": "Victorian England",
     }
     assert data["kwargs"]["name"] == "SequentialChain"
-    data = json.loads(overall_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT])
+    data = json.loads(overall_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT])
     assert data["outputs"].keys() == {"synopsis", "review"}
 
     logs = log_exporter.get_finished_logs()

@@ -10,8 +10,8 @@ from dataclasses import dataclass
 
 """---------------------------------------- Initializing environment ----------------------------------------"""
 
-if "ANYWAY_METRICS_ENABLED" not in os.environ:
-    os.environ["ANYWAY_METRICS_ENABLED"] = "true"
+if "TRACELOOP_METRICS_ENABLED" not in os.environ:
+    os.environ["TRACELOOP_METRICS_ENABLED"] = "true"
 
 load_dotenv()
 
