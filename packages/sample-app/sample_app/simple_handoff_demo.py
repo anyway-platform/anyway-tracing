@@ -6,12 +6,12 @@ A minimal example showing the fixed handoff hierarchy.
 Run this to see perfect parent-child span relationships in Traceloop!
 """
 
-from traceloop.sdk.instruments import Instruments
+from anyway.sdk.instruments import Instruments
 import asyncio
 import os
 from dotenv import load_dotenv
 from agents import Agent, function_tool, Runner
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 # Load environment variables from .env file
 load_dotenv()

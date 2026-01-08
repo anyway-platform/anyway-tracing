@@ -1,4 +1,4 @@
-name: Release - Traceloop SDK & Standalone Instrumentations
+name: Release - Anyway SDK & Standalone Instrumentations
 
 on:
   workflow_dispatch:
@@ -107,13 +107,13 @@ jobs:
 
       - run: npm ci
 
-      - name: Build Traceloop SDK
-        run: npx nx run traceloop-sdk:build-release
+      - name: Build Anyway SDK
+        run: npx nx run anyway-sdk:build-release
 
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: packages/traceloop-sdk/dist/
+          packages-dir: packages/anyway-sdk/dist/
 
   test-sdk-installation:
     runs-on: ubuntu-latest
@@ -128,5 +128,5 @@ jobs:
         with:
           python-version: 3.11
 
-      - name: Install Traceloop SDK
-        run: pip install traceloop-sdk==${{ needs.bump-version.outputs.new_version }}
+      - name: Install Anyway SDK
+        run: pip install anyway-sdk==${{ needs.bump-version.outputs.new_version }}

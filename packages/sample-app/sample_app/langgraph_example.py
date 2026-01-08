@@ -7,7 +7,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, StateGraph, MessagesState
 from langgraph.prebuilt import ToolNode
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="langgraph_example")
 

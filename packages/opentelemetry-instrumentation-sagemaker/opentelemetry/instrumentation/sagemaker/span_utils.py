@@ -33,7 +33,7 @@ def set_stream_response_attributes(span, response_body):
         return
 
     _set_span_attribute(
-        span, SpanAttributes.TRACELOOP_ENTITY_OUTPUT, json.dumps(response_body)
+        span, SpanAttributes.ANYWAY_ENTITY_OUTPUT, json.dumps(response_body)
     )
 
 
@@ -52,7 +52,7 @@ def set_call_request_attributes(span, kwargs):
     raw_request = kwargs.get("Body")
     request_body = _try_parse_json(raw_request)
     _set_span_attribute(
-        span, SpanAttributes.TRACELOOP_ENTITY_INPUT, json.dumps(request_body)
+        span, SpanAttributes.ANYWAY_ENTITY_INPUT, json.dumps(request_body)
     )
 
 
@@ -62,5 +62,5 @@ def set_call_response_attributes(span, raw_response):
     response_body = _try_parse_json(raw_response)
 
     _set_span_attribute(
-        span, SpanAttributes.TRACELOOP_ENTITY_OUTPUT, json.dumps(response_body)
+        span, SpanAttributes.ANYWAY_ENTITY_OUTPUT, json.dumps(response_body)
     )

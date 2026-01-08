@@ -4,7 +4,7 @@ import os
 
 import pytest
 from opentelemetry.instrumentation.vertexai import VertexAIInstrumentor
-from opentelemetry.instrumentation.vertexai.utils import TRACELOOP_TRACE_CONTENT
+from opentelemetry.instrumentation.vertexai.utils import ANYWAY_TRACE_CONTENT
 from opentelemetry.sdk._logs import LoggerProvider
 from opentelemetry.sdk._logs.export import (
     InMemoryLogExporter,
@@ -82,7 +82,7 @@ def instrument_legacy(reader, tracer_provider, meter_provider):
 def instrument_with_content(
     reader, tracer_provider, logger_provider, meter_provider
 ):
-    os.environ.update({TRACELOOP_TRACE_CONTENT: "True"})
+    os.environ.update({ANYWAY_TRACE_CONTENT: "True"})
 
     instrumentor = VertexAIInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -93,7 +93,7 @@ def instrument_with_content(
 
     yield instrumentor
 
-    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
+    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
     instrumentor.uninstrument()
 
 
@@ -101,7 +101,7 @@ def instrument_with_content(
 def instrument_with_no_content(
     reader, tracer_provider, logger_provider, meter_provider
 ):
-    os.environ.update({TRACELOOP_TRACE_CONTENT: "False"})
+    os.environ.update({ANYWAY_TRACE_CONTENT: "False"})
 
     instrumentor = VertexAIInstrumentor(use_legacy_attributes=False)
     instrumentor.instrument(
@@ -112,7 +112,7 @@ def instrument_with_no_content(
 
     yield instrumentor
 
-    os.environ.pop(TRACELOOP_TRACE_CONTENT, None)
+    os.environ.pop(ANYWAY_TRACE_CONTENT, None)
     instrumentor.uninstrument()
 
 

@@ -6,7 +6,7 @@ import os
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 

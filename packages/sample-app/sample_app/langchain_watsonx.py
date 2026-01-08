@@ -3,7 +3,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_ibm import WatsonxLLM
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="langchain_watsonx")
 

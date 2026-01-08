@@ -17,8 +17,8 @@ import os
 
 from openai import AsyncOpenAI
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 
 # Initialize tracing

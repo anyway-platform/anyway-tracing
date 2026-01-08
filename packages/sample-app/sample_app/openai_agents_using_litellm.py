@@ -3,7 +3,7 @@ import os
 from agents import Agent, Runner
 from agents.extensions.models.litellm_model import LitellmModel
 from agents import ModelSettings
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init()
 

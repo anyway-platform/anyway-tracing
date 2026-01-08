@@ -1,7 +1,7 @@
 import os
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import task, agent, workflow, tool
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import task, agent, workflow, tool
 
 from openai import OpenAI
 

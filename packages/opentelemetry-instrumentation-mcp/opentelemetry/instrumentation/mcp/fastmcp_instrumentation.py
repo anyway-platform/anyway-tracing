@@ -83,18 +83,18 @@ class FastMCPInstrumentor:
 
             # Create parent server.mcp span
             with self._tracer.start_as_current_span("mcp.server") as mcp_span:
-                mcp_span.set_attribute(SpanAttributes.TRACELOOP_SPAN_KIND, "server")
-                mcp_span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, "mcp.server")
+                mcp_span.set_attribute(SpanAttributes.ANYWAY_SPAN_KIND, "server")
+                mcp_span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, "mcp.server")
                 if self._server_name:
-                    mcp_span.set_attribute(SpanAttributes.TRACELOOP_WORKFLOW_NAME, self._server_name)
+                    mcp_span.set_attribute(SpanAttributes.ANYWAY_WORKFLOW_NAME, self._server_name)
 
                 # Create nested tool span
                 span_name = f"{entity_name}.tool"
                 with self._tracer.start_as_current_span(span_name) as tool_span:
-                    tool_span.set_attribute(SpanAttributes.TRACELOOP_SPAN_KIND, TraceloopSpanKindValues.TOOL.value)
-                    tool_span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, entity_name)
+                    tool_span.set_attribute(SpanAttributes.ANYWAY_SPAN_KIND, TraceloopSpanKindValues.TOOL.value)
+                    tool_span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, entity_name)
                     if self._server_name:
-                        tool_span.set_attribute(SpanAttributes.TRACELOOP_WORKFLOW_NAME, self._server_name)
+                        tool_span.set_attribute(SpanAttributes.ANYWAY_WORKFLOW_NAME, self._server_name)
 
                     if self._should_send_prompts():
                         try:
@@ -104,7 +104,7 @@ class FastMCPInstrumentor:
                             }
                             json_input = json.dumps(input_data, cls=self._get_json_encoder())
                             truncated_input = self._truncate_json_if_needed(json_input)
-                            tool_span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_INPUT, truncated_input)
+                            tool_span.set_attribute(SpanAttributes.ANYWAY_ENTITY_INPUT, truncated_input)
                         except (TypeError, ValueError):
                             pass  # Skip input logging if serialization fails
 
@@ -138,7 +138,7 @@ class FastMCPInstrumentor:
 
                                 json_output = json.dumps(output_data, cls=self._get_json_encoder())
                                 truncated_output = self._truncate_json_if_needed(json_output)
-                                tool_span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_OUTPUT, truncated_output)
+                                tool_span.set_attribute(SpanAttributes.ANYWAY_ENTITY_OUTPUT, truncated_output)
 
                                 # Also add response to MCP span
                                 mcp_span.set_attribute(SpanAttributes.MCP_RESPONSE_VALUE, truncated_output)
@@ -156,7 +156,7 @@ class FastMCPInstrumentor:
     def _should_send_prompts(self):
         """Check if content tracing is enabled (matches traceloop SDK)"""
         return (
-            os.getenv("TRACELOOP_TRACE_CONTENT") or "true"
+            os.getenv("ANYWAY_TRACE_CONTENT") or "true"
         ).lower() == "true"
 
     def _get_json_encoder(self):

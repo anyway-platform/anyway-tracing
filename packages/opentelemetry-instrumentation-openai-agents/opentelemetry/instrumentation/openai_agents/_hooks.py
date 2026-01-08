@@ -16,7 +16,7 @@ from .utils import dont_throw
 try:
     # Attempt to import once, so that we aren't looking for it repeatedly.
     # Each failed lookup is somewhat expensive as it has to walk the path.
-    from traceloop.sdk.tracing import set_agent_name
+    from anyway.sdk.tracing import set_agent_name
 except ModuleNotFoundError:
     set_agent_name = None
 
@@ -45,7 +45,7 @@ class OpenTelemetryTracingProcessor(TracingProcessor):
             "Agent Workflow",
             kind=SpanKind.CLIENT,
             attributes={
-                SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.WORKFLOW.value,
+                SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.WORKFLOW.value,
                 "gen_ai.system": "openai_agents",
                 "gen_ai.workflow.name": "Agent Workflow"
             }
@@ -94,7 +94,7 @@ class OpenTelemetryTracingProcessor(TracingProcessor):
                     handoff_parent = parent_agent_name
 
             attributes = {
-                SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
+                SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
                 GenAIAttributes.GEN_AI_AGENT_NAME: agent_name,
                 "gen_ai.system": "openai_agents"
             }
@@ -138,7 +138,7 @@ class OpenTelemetryTracingProcessor(TracingProcessor):
                 parent_context = set_span_in_context(from_agent_span)
 
             handoff_attributes = {
-                SpanAttributes.TRACELOOP_SPAN_KIND: "handoff",
+                SpanAttributes.ANYWAY_SPAN_KIND: "handoff",
                 "gen_ai.system": "openai_agents"
             }
 
@@ -163,7 +163,7 @@ class OpenTelemetryTracingProcessor(TracingProcessor):
                 parent_context = set_span_in_context(current_agent_span)
 
             tool_attributes = {
-                SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.TOOL.value,
+                SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.TOOL.value,
                 "gen_ai.tool.name": tool_name,
                 "gen_ai.system": "openai_agents",
                 f"{GenAIAttributes.GEN_AI_COMPLETION}.tool.name": tool_name,

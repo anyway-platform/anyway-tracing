@@ -3,7 +3,7 @@ from textwrap import dedent
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.team import Team
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 from dotenv import load_dotenv
 

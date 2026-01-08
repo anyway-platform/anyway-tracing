@@ -6,8 +6,8 @@ import os
 import tempfile
 from typing import Optional
 from datetime import datetime
-from traceloop.sdk import Traceloop
-from traceloop.sdk.datasets import Dataset, ColumnType, Column, Row
+from anyway.sdk import Traceloop
+from anyway.sdk.datasets import Dataset, ColumnType, Column, Row
 import pandas as pd
 import openai
 

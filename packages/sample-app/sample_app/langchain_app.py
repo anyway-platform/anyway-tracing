@@ -3,7 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="langchain_example")
 

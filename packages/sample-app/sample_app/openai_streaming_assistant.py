@@ -1,6 +1,6 @@
 from typing_extensions import override
 from openai import OpenAI, AssistantEventHandler
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init()
 

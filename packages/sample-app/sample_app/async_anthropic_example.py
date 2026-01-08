@@ -2,8 +2,8 @@ import asyncio
 import requests
 from anthropic import AsyncAnthropic
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import agent, workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import agent, workflow
 
 anthropic = AsyncAnthropic()
 

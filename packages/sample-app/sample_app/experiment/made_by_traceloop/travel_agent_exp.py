@@ -17,9 +17,9 @@ import asyncio
 import sys
 from pathlib import Path
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.evaluator import EvaluatorMadeByTraceloop
-from traceloop.sdk.experiment.utils import run_with_span_capture
+from anyway.sdk import Traceloop
+from anyway.sdk.evaluator import EvaluatorMadeByTraceloop
+from anyway.sdk.experiment.utils import run_with_span_capture
 
 # Add the agents directory to sys.path for imports
 agents_dir = Path(__file__).parent.parent.parent / "agents"

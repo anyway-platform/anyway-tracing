@@ -3,15 +3,15 @@ import os
 
 from writerai import Writer
 from dotenv import load_dotenv
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import tool
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import tool
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 
 """---------------------------------------- Initializing environment ----------------------------------------"""
 
-if "TRACELOOP_METRICS_ENABLED" not in os.environ:
-    os.environ["TRACELOOP_METRICS_ENABLED"] = "true"
+if "ANYWAY_METRICS_ENABLED" not in os.environ:
+    os.environ["ANYWAY_METRICS_ENABLED"] = "true"
 
 load_dotenv()
 

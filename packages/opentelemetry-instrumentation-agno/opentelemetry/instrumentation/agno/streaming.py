@@ -74,7 +74,7 @@ class AgnoAsyncStream(ObjectProxy):
                 result = self._self_final_result
                 if hasattr(result, "content") and should_send_prompts():
                     self._self_span.set_attribute(
-                        SpanAttributes.TRACELOOP_ENTITY_OUTPUT, str(result.content)
+                        SpanAttributes.ANYWAY_ENTITY_OUTPUT, str(result.content)
                     )
 
                 if hasattr(result, "run_id"):
@@ -104,7 +104,7 @@ class AgnoAsyncStream(ObjectProxy):
                     duration,
                     attributes={
                         GenAIAttributes.GEN_AI_SYSTEM: "agno",
-                        SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
+                        SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
                     },
                 )
 
@@ -177,7 +177,7 @@ class AgnoStream(ObjectProxy):
                 result = self._self_final_result
                 if hasattr(result, "content") and should_send_prompts():
                     self._self_span.set_attribute(
-                        SpanAttributes.TRACELOOP_ENTITY_OUTPUT, str(result.content)
+                        SpanAttributes.ANYWAY_ENTITY_OUTPUT, str(result.content)
                     )
 
                 if hasattr(result, "run_id"):
@@ -207,7 +207,7 @@ class AgnoStream(ObjectProxy):
                     duration,
                     attributes={
                         GenAIAttributes.GEN_AI_SYSTEM: "agno",
-                        SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
+                        SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.AGENT.value,
                     },
                 )
 

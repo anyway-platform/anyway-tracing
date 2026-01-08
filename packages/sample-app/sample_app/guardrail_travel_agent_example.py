@@ -10,8 +10,8 @@ from pathlib import Path
 agents_dir = Path(__file__).parent / "agents"
 sys.path.insert(0, str(agents_dir))
 
-from traceloop.sdk.guardrails.guardrails import guardrail  # noqa: E402
-from traceloop.sdk.evaluator import EvaluatorMadeByTraceloop  # noqa: E402
+from anyway.sdk.guardrails.guardrails import guardrail  # noqa: E402
+from anyway.sdk.evaluator import EvaluatorMadeByTraceloop  # noqa: E402
 
 # Import the travel agent function
 try:

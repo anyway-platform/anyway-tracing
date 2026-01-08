@@ -9,8 +9,8 @@ from mcp.client.stdio import stdio_client
 from anthropic import Anthropic
 from dotenv import load_dotenv
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 load_dotenv()
 

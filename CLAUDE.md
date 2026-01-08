@@ -68,7 +68,7 @@ For debugging OpenTelemetry spans and hierarchy issues, use the console exporter
 
 ```python
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(
     app_name="debug-app",

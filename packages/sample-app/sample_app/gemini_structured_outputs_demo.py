@@ -1,6 +1,6 @@
 import os
 import google.generativeai as genai
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 from dotenv import load_dotenv
 
 load_dotenv()

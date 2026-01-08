@@ -37,7 +37,7 @@ class LangchainInstrumentor(BaseInstrumentor):
         exception_logger=None,
         disable_trace_context_propagation=False,
         use_legacy_attributes: bool = True,
-        metadata_key_prefix: str = SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES
+        metadata_key_prefix: str = SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES
     ):
         """Create a Langchain instrumentor instance.
 
@@ -47,7 +47,7 @@ class LangchainInstrumentor(BaseInstrumentor):
             disable_trace_context_propagation: If True, disables trace context propagation to LLM providers.
             use_legacy_attributes: If True, uses span attributes for Inputs/Outputs instead of events.
             metadata_key_prefix: Prefix for metadata keys added to spans. Defaults to
-                `SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES`.
+                `SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES`.
                 Useful for using with other backends.
         """
         super().__init__()

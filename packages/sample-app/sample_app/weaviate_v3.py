@@ -7,10 +7,10 @@ import os
 
 import weaviate
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import task
-from traceloop.sdk.decorators import workflow
-from traceloop.sdk.instruments import Instruments
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import task
+from anyway.sdk.decorators import workflow
+from anyway.sdk.instruments import Instruments
 
 
 CLASS_NAME = "Article"
@@ -209,7 +209,7 @@ if __name__ == "__main__":
     Traceloop.init(
         app_name="weaviate_app",
         disable_batch=True,
-        exporter=None if os.getenv("TRACELOOP_API_KEY") else ConsoleSpanExporter(),
+        exporter=None if os.getenv("ANYWAY_API_KEY") else ConsoleSpanExporter(),
         # comment below if you would like to see everything
         instruments={Instruments.WEAVIATE},
     )

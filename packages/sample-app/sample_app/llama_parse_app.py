@@ -1,7 +1,7 @@
 import os
 import asyncio
 from llama_parse import LlamaParse
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init()
 

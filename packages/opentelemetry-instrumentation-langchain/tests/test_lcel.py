@@ -67,7 +67,7 @@ def test_simple_lcel(instrument_legacy, span_exporter, log_exporter):
     assert output_parser_task_span.parent.span_id == workflow_span.context.span_id
 
     assert json.loads(
-        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]
+        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]
     ) == {
         "inputs": {"input": "tell me a short joke"},
         "tags": ["test_tag"],
@@ -75,7 +75,7 @@ def test_simple_lcel(instrument_legacy, span_exporter, log_exporter):
         "kwargs": {"name": "ThisIsATestChain"},
     }
     assert json.loads(
-        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
+        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
     ) == {
         "outputs": {
             "setup": "Why couldn't the bicycle stand up by itself?",
@@ -84,7 +84,7 @@ def test_simple_lcel(instrument_legacy, span_exporter, log_exporter):
         "kwargs": {"tags": ["test_tag"]},
     }
     assert json.loads(
-        prompt_task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]
+        prompt_task_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]
     ) == {
         "inputs": {"input": "tell me a short joke"},
         "tags": ["seq:step:1", "test_tag"],
@@ -95,7 +95,7 @@ def test_simple_lcel(instrument_legacy, span_exporter, log_exporter):
         },
     }
     assert json.loads(
-        prompt_task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
+        prompt_task_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
     ) == {
         "kwargs": {"tags": ["seq:step:1", "test_tag"]},
         "outputs": {
@@ -324,7 +324,7 @@ async def test_async_lcel(instrument_legacy, span_exporter, log_exporter):
     assert output_parser_task_span.parent.span_id == workflow_span.context.span_id
 
     assert json.loads(
-        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]
+        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]
     ) == {
         "inputs": {"product": "colorful socks"},
         "tags": [],
@@ -332,7 +332,7 @@ async def test_async_lcel(instrument_legacy, span_exporter, log_exporter):
         "kwargs": {"name": "RunnableSequence"},
     }
     assert json.loads(
-        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_OUTPUT]
+        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_OUTPUT]
     ) == {
         "outputs": response,
         "kwargs": {"tags": []},
@@ -842,7 +842,7 @@ def test_lcel_with_datetime(instrument_legacy, span_exporter, log_exporter):
     )
 
     entity_input = json.loads(
-        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]
+        workflow_span.attributes[SpanAttributes.ANYWAY_ENTITY_INPUT]
     )
 
     assert entity_input["metadata"]["timestamp"] == "2023-05-17T12:34:56"

@@ -1,6 +1,6 @@
 import time
 from openai import OpenAI
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init()
 

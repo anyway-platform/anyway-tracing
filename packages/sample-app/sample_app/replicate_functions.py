@@ -1,7 +1,7 @@
 import replicate
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import task, workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import task, workflow
 
 Traceloop.init(app_name="image_generation_service")
 

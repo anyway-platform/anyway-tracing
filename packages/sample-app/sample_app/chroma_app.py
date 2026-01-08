@@ -6,8 +6,8 @@ from openai import OpenAI
 
 import chromadb
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 

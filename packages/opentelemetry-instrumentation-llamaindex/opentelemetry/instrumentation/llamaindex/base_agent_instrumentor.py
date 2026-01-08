@@ -53,10 +53,10 @@ def query_wrapper(tracer, wrapped, instance, args, kwargs):
     name = instance.__class__.__name__
     with tracer.start_as_current_span(f"{name}.agent") as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.AGENT.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, name)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, name)
 
         process_request(span, args, kwargs)
         res = wrapped(*args, **kwargs)
@@ -69,10 +69,10 @@ async def aquery_wrapper(tracer, wrapped, instance, args, kwargs):
     name = instance.__class__.__name__
     async with start_as_current_span_async(tracer=tracer, name=f"{name}.agent") as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.AGENT.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, name)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, name)
 
         process_request(span, args, kwargs)
         res = await wrapped(*args, **kwargs)

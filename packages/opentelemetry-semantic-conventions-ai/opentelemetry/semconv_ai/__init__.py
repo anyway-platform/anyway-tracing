@@ -114,26 +114,26 @@ class SpanAttributes:
     PINECONE_QUERY_TOP_K = "pinecone.query.top_k"
 
     # LLM Workflows
-    TRACELOOP_SPAN_KIND = "traceloop.span.kind"
-    TRACELOOP_WORKFLOW_NAME = "traceloop.workflow.name"
-    TRACELOOP_ENTITY_NAME = "traceloop.entity.name"
-    TRACELOOP_ENTITY_PATH = "traceloop.entity.path"
-    TRACELOOP_ENTITY_VERSION = "traceloop.entity.version"
-    TRACELOOP_ENTITY_INPUT = "traceloop.entity.input"
-    TRACELOOP_ENTITY_OUTPUT = "traceloop.entity.output"
-    TRACELOOP_ASSOCIATION_PROPERTIES = "traceloop.association.properties"
+    ANYWAY_SPAN_KIND = "anyway.span.kind"
+    ANYWAY_WORKFLOW_NAME = "anyway.workflow.name"
+    ANYWAY_ENTITY_NAME = "anyway.entity.name"
+    ANYWAY_ENTITY_PATH = "anyway.entity.path"
+    ANYWAY_ENTITY_VERSION = "anyway.entity.version"
+    ANYWAY_ENTITY_INPUT = "anyway.entity.input"
+    ANYWAY_ENTITY_OUTPUT = "anyway.entity.output"
+    ANYWAY_ASSOCIATION_PROPERTIES = "anyway.association.properties"
 
     # Prompts
-    TRACELOOP_PROMPT_MANAGED = "traceloop.prompt.managed"
-    TRACELOOP_PROMPT_KEY = "traceloop.prompt.key"
-    TRACELOOP_PROMPT_VERSION = "traceloop.prompt.version"
-    TRACELOOP_PROMPT_VERSION_NAME = "traceloop.prompt.version_name"
-    TRACELOOP_PROMPT_VERSION_HASH = "traceloop.prompt.version_hash"
-    TRACELOOP_PROMPT_TEMPLATE = "traceloop.prompt.template"
-    TRACELOOP_PROMPT_TEMPLATE_VARIABLES = "traceloop.prompt.template_variables"
+    ANYWAY_PROMPT_MANAGED = "anyway.prompt.managed"
+    ANYWAY_PROMPT_KEY = "anyway.prompt.key"
+    ANYWAY_PROMPT_VERSION = "anyway.prompt.version"
+    ANYWAY_PROMPT_VERSION_NAME = "anyway.prompt.version_name"
+    ANYWAY_PROMPT_VERSION_HASH = "anyway.prompt.version_hash"
+    ANYWAY_PROMPT_TEMPLATE = "anyway.prompt.template"
+    ANYWAY_PROMPT_TEMPLATE_VARIABLES = "anyway.prompt.template_variables"
 
     # Deprecated
-    TRACELOOP_CORRELATION_ID = "traceloop.correlation.id"
+    ANYWAY_CORRELATION_ID = "anyway.correlation.id"
 
     # Watson/genai LLM
     LLM_DECODING_METHOD = "llm.watsonx.decoding_method"

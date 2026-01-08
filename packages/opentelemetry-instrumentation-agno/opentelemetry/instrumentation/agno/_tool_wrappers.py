@@ -37,9 +37,9 @@ class _FunctionCallExecuteWrapper:
         ) as span:
             try:
                 span.set_attribute(GenAIAttributes.GEN_AI_SYSTEM, "agno")
-                span.set_attribute(SpanAttributes.TRACELOOP_SPAN_KIND,
+                span.set_attribute(SpanAttributes.ANYWAY_SPAN_KIND,
                                    TraceloopSpanKindValues.TOOL.value)
-                span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, function_name)
+                span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, function_name)
 
                 if hasattr(instance.function, 'description') and instance.function.description:
                     span.set_attribute("tool.description", instance.function.description)
@@ -47,10 +47,10 @@ class _FunctionCallExecuteWrapper:
                 # Capture input arguments
                 if should_send_prompts():
                     if hasattr(instance, 'arguments') and instance.arguments:
-                        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_INPUT,
+                        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_INPUT,
                                            json.dumps(instance.arguments))
                     elif kwargs:
-                        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_INPUT,
+                        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_INPUT,
                                            json.dumps(kwargs))
 
                 start_time = time.time()
@@ -60,7 +60,7 @@ class _FunctionCallExecuteWrapper:
                 duration = time.time() - start_time
 
                 if result is not None and should_send_prompts():
-                    span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_OUTPUT, str(result))
+                    span.set_attribute(SpanAttributes.ANYWAY_ENTITY_OUTPUT, str(result))
 
                 span.set_status(Status(StatusCode.OK))
 
@@ -68,7 +68,7 @@ class _FunctionCallExecuteWrapper:
                     duration,
                     attributes={
                         GenAIAttributes.GEN_AI_SYSTEM: "agno",
-                        SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.TOOL.value,
+                        SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.TOOL.value,
                     }
                 )
 
@@ -106,9 +106,9 @@ class _FunctionCallAExecuteWrapper:
         ) as span:
             try:
                 span.set_attribute(GenAIAttributes.GEN_AI_SYSTEM, "agno")
-                span.set_attribute(SpanAttributes.TRACELOOP_SPAN_KIND,
+                span.set_attribute(SpanAttributes.ANYWAY_SPAN_KIND,
                                    TraceloopSpanKindValues.TOOL.value)
-                span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, function_name)
+                span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, function_name)
 
                 if hasattr(instance.function, 'description') and instance.function.description:
                     span.set_attribute("tool.description", instance.function.description)
@@ -116,10 +116,10 @@ class _FunctionCallAExecuteWrapper:
                 # Capture input arguments
                 if should_send_prompts():
                     if hasattr(instance, 'arguments') and instance.arguments:
-                        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_INPUT,
+                        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_INPUT,
                                            json.dumps(instance.arguments))
                     elif kwargs:
-                        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_INPUT,
+                        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_INPUT,
                                            json.dumps(kwargs))
 
                 start_time = time.time()
@@ -129,7 +129,7 @@ class _FunctionCallAExecuteWrapper:
                 duration = time.time() - start_time
 
                 if result is not None and should_send_prompts():
-                    span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_OUTPUT, str(result))
+                    span.set_attribute(SpanAttributes.ANYWAY_ENTITY_OUTPUT, str(result))
 
                 span.set_status(Status(StatusCode.OK))
 
@@ -137,7 +137,7 @@ class _FunctionCallAExecuteWrapper:
                     duration,
                     attributes={
                         GenAIAttributes.GEN_AI_SYSTEM: "agno",
-                        SpanAttributes.TRACELOOP_SPAN_KIND: TraceloopSpanKindValues.TOOL.value,
+                        SpanAttributes.ANYWAY_SPAN_KIND: TraceloopSpanKindValues.TOOL.value,
                     }
                 )
 

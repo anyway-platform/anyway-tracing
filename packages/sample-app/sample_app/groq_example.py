@@ -1,9 +1,9 @@
 import os
 
-from traceloop.sdk.decorators import task, workflow
+from anyway.sdk.decorators import task, workflow
 
 from groq import Groq
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="groq_example")
 

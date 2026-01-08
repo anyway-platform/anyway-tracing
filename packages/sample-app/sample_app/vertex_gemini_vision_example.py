@@ -1,8 +1,8 @@
 import os
 import dotenv
 import vertexai
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 from vertexai.generative_models import GenerativeModel, Part
 
 dotenv.load_dotenv()

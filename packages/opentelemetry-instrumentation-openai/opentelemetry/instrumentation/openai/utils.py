@@ -15,7 +15,7 @@ import openai
 
 _OPENAI_VERSION = version("openai")
 
-TRACELOOP_TRACE_CONTENT = "TRACELOOP_TRACE_CONTENT"
+ANYWAY_TRACE_CONTENT = "ANYWAY_TRACE_CONTENT"
 
 
 def is_openai_v1():
@@ -37,7 +37,7 @@ def is_azure_openai(instance):
 
 
 def is_metrics_enabled() -> bool:
-    return (os.getenv("TRACELOOP_METRICS_ENABLED") or "true").lower() == "true"
+    return (os.getenv("ANYWAY_METRICS_ENABLED") or "true").lower() == "true"
 
 
 def _with_image_gen_metric_wrapper(func):
@@ -176,7 +176,7 @@ def run_async(method):
 
 def should_send_prompts():
     return (
-        os.getenv(TRACELOOP_TRACE_CONTENT) or "true"
+        os.getenv(ANYWAY_TRACE_CONTENT) or "true"
     ).lower() == "true" or context_api.get_value("override_enable_content_tracing")
 
 

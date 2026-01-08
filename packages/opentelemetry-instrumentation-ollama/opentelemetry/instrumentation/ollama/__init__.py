@@ -453,7 +453,7 @@ def _build_metrics(meter: Meter):
 
 
 def is_metrics_collection_enabled() -> bool:
-    return (os.getenv("TRACELOOP_METRICS_ENABLED") or "true").lower() == "true"
+    return (os.getenv("ANYWAY_METRICS_ENABLED") or "true").lower() == "true"
 
 
 class OllamaInstrumentor(BaseInstrumentor):

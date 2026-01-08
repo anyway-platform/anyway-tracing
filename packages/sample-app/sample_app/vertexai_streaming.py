@@ -1,7 +1,7 @@
 import asyncio
 import vertexai
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 from vertexai.generative_models import GenerativeModel
 
 Traceloop.init(app_name="stream_prediction_service")

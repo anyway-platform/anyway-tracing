@@ -10,7 +10,7 @@ from opentelemetry._logs import Logger
 from opentelemetry.instrumentation.llamaindex.config import Config
 from opentelemetry.semconv_ai import SpanAttributes
 
-TRACELOOP_TRACE_CONTENT = "TRACELOOP_TRACE_CONTENT"
+ANYWAY_TRACE_CONTENT = "ANYWAY_TRACE_CONTENT"
 
 
 def _with_tracer_wrapper(func):
@@ -31,7 +31,7 @@ async def start_as_current_span_async(tracer, *args, **kwargs):
 
 def should_send_prompts():
     return (
-        os.getenv(TRACELOOP_TRACE_CONTENT) or "true"
+        os.getenv(ANYWAY_TRACE_CONTENT) or "true"
     ).lower() == "true" or context_api.get_value("override_enable_content_tracing")
 
 
@@ -75,7 +75,7 @@ class JSONEncoder(json.JSONEncoder):
 def process_request(span, args, kwargs):
     if should_send_prompts():
         span.set_attribute(
-            SpanAttributes.TRACELOOP_ENTITY_INPUT,
+            SpanAttributes.ANYWAY_ENTITY_INPUT,
             json.dumps({"args": args, "kwargs": kwargs}, cls=JSONEncoder),
         )
 
@@ -84,7 +84,7 @@ def process_request(span, args, kwargs):
 def process_response(span, res):
     if should_send_prompts():
         span.set_attribute(
-            SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
+            SpanAttributes.ANYWAY_ENTITY_OUTPUT,
             json.dumps(res, cls=JSONEncoder),
         )
 

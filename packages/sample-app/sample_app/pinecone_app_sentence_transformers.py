@@ -3,8 +3,8 @@ import os
 from pinecone import Pinecone
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import task, workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import task, workflow
 from sentence_transformers import SentenceTransformer
 
 # Set this to True for first run

@@ -7,7 +7,7 @@ import traceback
 from opentelemetry import context as context_api
 from opentelemetry.instrumentation.google_generativeai.config import Config
 
-TRACELOOP_TRACE_CONTENT = "TRACELOOP_TRACE_CONTENT"
+ANYWAY_TRACE_CONTENT = "ANYWAY_TRACE_CONTENT"
 
 
 def dont_throw(func):
@@ -37,7 +37,7 @@ def dont_throw(func):
 
 def should_send_prompts():
     return (
-        os.getenv(TRACELOOP_TRACE_CONTENT) or "true"
+        os.getenv(ANYWAY_TRACE_CONTENT) or "true"
     ).lower() == "true" or context_api.get_value("override_enable_content_tracing")
 
 

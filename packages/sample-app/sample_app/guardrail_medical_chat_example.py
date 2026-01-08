@@ -1,9 +1,9 @@
 import asyncio
 import os
 from openai import AsyncOpenAI
-from traceloop.sdk import Traceloop
-from traceloop.sdk.guardrails.guardrails import guardrail
-from traceloop.sdk.evaluator import EvaluatorMadeByTraceloop
+from anyway.sdk import Traceloop
+from anyway.sdk.guardrails.guardrails import guardrail
+from anyway.sdk.evaluator import EvaluatorMadeByTraceloop
 
 
 Traceloop.init(app_name="medical-chat-example")

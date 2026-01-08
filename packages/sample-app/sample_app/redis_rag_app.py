@@ -7,8 +7,8 @@ from redis.commands.search.field import TagField, VectorField, TextField
 from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 from redis.commands.search.query import Query
 from openai import OpenAI
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 INDEX_NAME = "index"
 DOC_PREFIX = "doc:"

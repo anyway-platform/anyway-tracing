@@ -89,8 +89,8 @@ develop = true
 path = "../opentelemetry-instrumentation-groq"
 develop = true
 
-[tool.poetry.dependencies.traceloop-sdk]
-path = "../traceloop-sdk"
+[tool.poetry.dependencies.anyway-sdk]
+path = "../anyway-sdk"
 develop = true
 
 [tool.poetry.dependencies.opentelemetry-instrumentation-crewai]

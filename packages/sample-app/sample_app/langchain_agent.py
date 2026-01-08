@@ -5,7 +5,7 @@ from langchain_community.llms.openai import OpenAI
 from langchain.utilities import DuckDuckGoSearchAPIWrapper
 
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="langchain_agent")
 

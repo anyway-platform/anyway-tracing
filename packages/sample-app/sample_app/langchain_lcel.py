@@ -8,7 +8,7 @@ from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="lcel_example")
 

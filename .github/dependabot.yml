@@ -233,7 +233,7 @@ updates:
     labels:
       - "dependencies"
   - package-ecosystem: "pip"
-    directory: "/packages/traceloop-sdk"
+    directory: "/packages/anyway-sdk"
     schedule:
       interval: "weekly"
     groups:

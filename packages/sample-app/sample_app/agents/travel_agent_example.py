@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from pydantic import BaseModel
 import requests
 from dotenv import load_dotenv
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 from agents import Agent, function_tool, RunContextWrapper, Runner, ToolCallOutputItem
 from openai.types.responses import (

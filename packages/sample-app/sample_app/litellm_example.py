@@ -4,8 +4,8 @@ import litellm
 def test_traceloop_logging():
     try:
         litellm.success_callback = ["traceloop"]
-        from traceloop.sdk import Traceloop
-        from traceloop.sdk.instruments import Instruments
+        from anyway.sdk import Traceloop
+        from anyway.sdk.instruments import Instruments
 
         Traceloop.init(app_name="...", instruments=set([Instruments.OPENAI]))
         litellm.set_verbose = False

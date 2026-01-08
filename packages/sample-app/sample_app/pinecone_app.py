@@ -5,8 +5,8 @@ import os
 from pinecone import Pinecone
 from openai import OpenAI
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import task, workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import task, workflow
 
 client = OpenAI()
 

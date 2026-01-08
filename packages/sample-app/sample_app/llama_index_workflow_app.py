@@ -6,7 +6,7 @@ from llama_index.core.workflow import (
     step,
 )
 from llama_index.llms.openai import OpenAI
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 
 class JokeEvent(Event):

@@ -7,8 +7,8 @@ from chromadb.utils.embedding_functions import (
 )
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter
 import pandas as pd
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 
 Traceloop.init(

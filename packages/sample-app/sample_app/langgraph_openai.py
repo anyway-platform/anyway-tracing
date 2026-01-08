@@ -1,7 +1,7 @@
 from openai import OpenAI
 from typing import TypedDict
 from langgraph.graph import StateGraph
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="langgraph_example")
 

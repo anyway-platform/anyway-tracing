@@ -1,8 +1,8 @@
 import os
 from openai import OpenAI
 from pydantic import BaseModel
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow, task
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow, task
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 

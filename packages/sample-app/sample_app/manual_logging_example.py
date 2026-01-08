@@ -2,14 +2,14 @@
 Manual logging example using OpenLLMetry tracing.
 
 This example demonstrates how to manually report LLM calls using the
-track_llm_call context manager from traceloop.sdk.tracing.manual.
+track_llm_call context manager from anyway.sdk.tracing.manual.
 """
 
 import os
 import openai
 from dotenv import load_dotenv
-from traceloop.sdk import Traceloop
-from traceloop.sdk.tracing.manual import LLMMessage, LLMUsage, track_llm_call
+from anyway.sdk import Traceloop
+from anyway.sdk.tracing.manual import LLMMessage, LLMUsage, track_llm_call
 
 
 def main():

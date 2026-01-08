@@ -3,8 +3,8 @@ import types
 from ibm_watsonx_ai.metanames import GenTextParamsMetaNames
 from ibm_watsonx_ai.foundation_models import ModelInference
 from pprint import pprint
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 from dotenv import load_dotenv
 load_dotenv()

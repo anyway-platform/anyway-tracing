@@ -13,8 +13,8 @@ import os
 import json
 import asyncio
 from pathlib import Path
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 # Initialize Traceloop FIRST - before importing guardrails
 Traceloop.init(app_name="openai-guardrails-example", disable_batch=True)

@@ -43,4 +43,4 @@ def set_span_attribute(span: Span, name: str, value: Any) -> None:
 def should_send_prompts() -> bool:
     """Check if prompts should be sent based on environment variables."""
     import os
-    return os.getenv("TRACELOOP_TRACE_CONTENT", "true").lower() == "true"
+    return os.getenv("ANYWAY_TRACE_CONTENT", "true").lower() == "true"

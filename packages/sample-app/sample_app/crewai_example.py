@@ -1,6 +1,6 @@
 from crewai import Agent, Task, Crew
 from langchain_openai import ChatOpenAI
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="crewai-example")
 

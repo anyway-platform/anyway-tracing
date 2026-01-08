@@ -22,7 +22,7 @@ try:
 except ImportError:
     _PYDANTIC_VERSION = "0.0.0"
 
-TRACELOOP_TRACE_CONTENT = "TRACELOOP_TRACE_CONTENT"
+ANYWAY_TRACE_CONTENT = "ANYWAY_TRACE_CONTENT"
 
 
 def set_span_attribute(span: Span, name: str, value: Any | None) -> None:
@@ -32,7 +32,7 @@ def set_span_attribute(span: Span, name: str, value: Any | None) -> None:
 
 def should_send_prompts() -> bool:
     return (
-        os.getenv(TRACELOOP_TRACE_CONTENT) or "true"
+        os.getenv(ANYWAY_TRACE_CONTENT) or "true"
     ).lower() == "true" or context_api.get_value("override_enable_content_tracing")
 
 

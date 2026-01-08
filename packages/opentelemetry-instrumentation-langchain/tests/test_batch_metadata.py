@@ -34,9 +34,9 @@ def test_batch_metadata_in_span_attributes(instrument_legacy, span_exporter):
     # Each span should contain the metadata as attributes
     for span in llm_spans:
         # Check if metadata is present as span attributes
-        user_id_key = f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
-        session_id_key = f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
-        priority_key = f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.priority"
+        user_id_key = f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+        session_id_key = f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+        priority_key = f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.priority"
 
         assert ("user_id" in span.attributes or user_id_key in span.attributes)
         assert ("session_id" in span.attributes or session_id_key in span.attributes)
@@ -84,9 +84,9 @@ async def test_async_batch_metadata_in_span_attributes(instrument_legacy, span_e
     # Each span should contain the metadata as attributes
     for span in llm_spans:
         # Check if metadata is present as span attributes
-        user_id_key = f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
-        session_id_key = f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
-        environment_key = f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.environment"
+        user_id_key = f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.user_id"
+        session_id_key = f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.session_id"
+        environment_key = f"{SpanAttributes.ANYWAY_ASSOCIATION_PROPERTIES}.environment"
 
         assert ("user_id" in span.attributes or user_id_key in span.attributes)
         assert ("session_id" in span.attributes or session_id_key in span.attributes)

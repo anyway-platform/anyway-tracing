@@ -1,8 +1,8 @@
 import boto3
 import json
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import task, workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import task, workflow
 
 Traceloop.init(app_name="joke_generation_service")
 brt = boto3.client(service_name='bedrock-runtime')

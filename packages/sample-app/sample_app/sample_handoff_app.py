@@ -9,7 +9,7 @@ Run with: python sample_handoff_app.py
 Then view the traces in Traceloop to see the beautiful hierarchy!
 """
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 import asyncio
 import os
 from dotenv import load_dotenv
@@ -22,8 +22,8 @@ load_dotenv()
 Traceloop.init(
     app_name="agent-handoff-demo",
     disable_batch=True,  # For immediate trace visibility
-    api_endpoint=os.getenv("TRACELOOP_API_ENDPOINT", "https://api.traceloop.com"),
-    api_key=os.getenv("TRACELOOP_API_KEY"),  # Set your Traceloop API key
+    api_endpoint=os.getenv("ANYWAY_API_ENDPOINT", "https://api.traceloop.com"),
+    api_key=os.getenv("ANYWAY_API_KEY"),  # Set your Traceloop API key
 )
 
 print("🔧 Traceloop initialized!")
@@ -159,7 +159,7 @@ async def main():
     print("• All tool executions are properly nested in the trace hierarchy")
     print("• Single unified trace instead of multiple separate traces")
     print("\n💡 Make sure to set your environment variables:")
-    print("   export TRACELOOP_API_KEY='your-traceloop-api-key'")
+    print("   export ANYWAY_API_KEY='your-traceloop-api-key'")
     print("   export OPENAI_API_KEY='your-openai-api-key'")
     print("\n🔗 View results at: https://app.traceloop.com/")
 
@@ -169,9 +169,9 @@ async def main():
         print("   Please set your OpenAI API key: export OPENAI_API_KEY='sk-...'")
         return
 
-    if not os.getenv("TRACELOOP_API_KEY"):
-        print("\n⚠️  Warning: TRACELOOP_API_KEY not set - traces won't be sent to Traceloop")
-        print("   Set your API key: export TRACELOOP_API_KEY='...'")
+    if not os.getenv("ANYWAY_API_KEY"):
+        print("\n⚠️  Warning: ANYWAY_API_KEY not set - traces won't be sent to Traceloop")
+        print("   Set your API key: export ANYWAY_API_KEY='...'")
         print("   You can still see local trace logs below.")
 
     # Run different workflow scenarios
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     Usage:
     1. Set environment variables:
        export OPENAI_API_KEY="your-openai-api-key"
-       export TRACELOOP_API_KEY="your-traceloop-api-key"  # Optional
+       export ANYWAY_API_KEY="your-traceloop-api-key"  # Optional
 
     2. Install dependencies:
        pip install openai-agents traceloop-sdk

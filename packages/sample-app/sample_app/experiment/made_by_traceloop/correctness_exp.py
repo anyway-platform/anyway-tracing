@@ -12,8 +12,8 @@ relevant, and faithful responses.
 import asyncio
 import os
 from openai import AsyncOpenAI
-from traceloop.sdk import Traceloop
-from traceloop.sdk.evaluator import EvaluatorMadeByTraceloop
+from anyway.sdk import Traceloop
+from anyway.sdk.evaluator import EvaluatorMadeByTraceloop
 
 # Initialize Traceloop
 client = Traceloop.init()

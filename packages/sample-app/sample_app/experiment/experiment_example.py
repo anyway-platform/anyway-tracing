@@ -7,7 +7,7 @@ import os
 
 from openai import AsyncOpenAI
 from medical_prompts import refuse_medical_advice_prompt, provide_medical_info_prompt
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 client = Traceloop.init()
 

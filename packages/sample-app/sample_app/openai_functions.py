@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 

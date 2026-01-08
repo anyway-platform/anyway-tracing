@@ -45,10 +45,10 @@ class LlamaParseInstrumentor:
 def get_json_wrapper(tracer, wrapped, instance, args, kwargs):
     with tracer.start_as_current_span(f"{TASK_NAME}.task") as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         result = wrapped(*args, **kwargs)
@@ -62,10 +62,10 @@ async def aget_json_wrapper(tracer, wrapped, instance, args, kwargs):
         tracer=tracer, name=f"{TASK_NAME}.task"
     ) as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         result = await wrapped(*args, **kwargs)
@@ -77,10 +77,10 @@ async def aget_json_wrapper(tracer, wrapped, instance, args, kwargs):
 def get_images_wrapper(tracer, wrapped, instance, args, kwargs):
     with tracer.start_as_current_span(f"{TASK_NAME}.task") as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         result = wrapped(*args, **kwargs)
@@ -94,10 +94,10 @@ async def aget_images_wrapper(tracer, wrapped, instance, args, kwargs):
         tracer=tracer, name=f"{TASK_NAME}.task"
     ) as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         result = await wrapped(*args, **kwargs)
@@ -109,10 +109,10 @@ async def aget_images_wrapper(tracer, wrapped, instance, args, kwargs):
 def get_charts_wrapper(tracer, wrapped, instance, args, kwargs):
     with tracer.start_as_current_span(f"{TASK_NAME}.task") as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         result = wrapped(*args, **kwargs)
@@ -126,10 +126,10 @@ async def aget_charts_wrapper(tracer, wrapped, instance, args, kwargs):
         tracer=tracer, name=f"{TASK_NAME}.task"
     ) as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         result = await wrapped(*args, **kwargs)
@@ -141,10 +141,10 @@ async def aget_charts_wrapper(tracer, wrapped, instance, args, kwargs):
 def load_data_wrapper(tracer, wrapped, instance, args, kwargs):
     with tracer.start_as_current_span(f"{TASK_NAME}.task") as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         result = wrapped(*args, **kwargs)
@@ -158,10 +158,10 @@ async def aload_data_wrapper(tracer, wrapped, instance, args, kwargs):
         tracer=tracer, name=f"{TASK_NAME}.task"
     ) as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         result = await wrapped(*args, **kwargs)

@@ -3,8 +3,8 @@ import os
 import requests
 from openai import OpenAI
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import agent, workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import agent, workflow
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 

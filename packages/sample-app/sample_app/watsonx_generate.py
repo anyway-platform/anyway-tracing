@@ -1,7 +1,7 @@
 import os
 from ibm_watson_machine_learning.foundation_models import Model
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 from dotenv import load_dotenv
 load_dotenv()

@@ -44,10 +44,10 @@ class BaseSynthesizerInstrumentor:
 def synthesize_wrapper(tracer, wrapped, instance, args, kwargs):
     with tracer.start_as_current_span(f"{TASK_NAME}.task") as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         res = wrapped(*args, **kwargs)
@@ -61,10 +61,10 @@ async def asynthesize_wrapper(tracer, wrapped, instance, args, kwargs):
         tracer=tracer, name=f"{TASK_NAME}.task"
     ) as span:
         span.set_attribute(
-            SpanAttributes.TRACELOOP_SPAN_KIND,
+            SpanAttributes.ANYWAY_SPAN_KIND,
             TraceloopSpanKindValues.TASK.value,
         )
-        span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, TASK_NAME)
+        span.set_attribute(SpanAttributes.ANYWAY_ENTITY_NAME, TASK_NAME)
 
         process_request(span, args, kwargs)
         res = await wrapped(*args, **kwargs)

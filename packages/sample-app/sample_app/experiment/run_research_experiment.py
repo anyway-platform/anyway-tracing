@@ -10,14 +10,14 @@ This script:
 import asyncio
 import os
 from openai import AsyncOpenAI
-from traceloop.sdk import Traceloop
-from traceloop.sdk.experiment.model import RunInGithubResponse
+from anyway.sdk import Traceloop
+from anyway.sdk.experiment.model import RunInGithubResponse
 
 # Initialize Traceloop client
 client = Traceloop.init(
     app_name="research-experiment-ci-cd",
-    api_key=os.getenv("TRACELOOP_API_KEY"),
-    api_endpoint=os.getenv("TRACELOOP_BASE_URL"),
+    api_key=os.getenv("ANYWAY_API_KEY"),
+    api_endpoint=os.getenv("ANYWAY_BASE_URL"),
 )
 
 

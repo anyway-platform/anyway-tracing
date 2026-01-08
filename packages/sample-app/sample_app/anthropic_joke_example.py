@@ -1,7 +1,7 @@
 from anthropic import Anthropic
 
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 Traceloop.init()
 

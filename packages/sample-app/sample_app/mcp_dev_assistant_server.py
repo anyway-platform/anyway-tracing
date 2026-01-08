@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Optional
 from dotenv import load_dotenv
 from fastmcp import FastMCP
 from pydantic import BaseModel
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 # Load environment variables
 load_dotenv()

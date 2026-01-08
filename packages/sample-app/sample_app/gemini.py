@@ -1,8 +1,8 @@
 import os
 import asyncio
 import google.genai as genai
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 Traceloop.init(app_name="gemini_example")
 

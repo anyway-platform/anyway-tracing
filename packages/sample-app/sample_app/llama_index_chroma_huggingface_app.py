@@ -12,7 +12,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.huggingface import HuggingFaceInferenceAPI
 from llama_index.vector_stores.chroma import ChromaVectorStore
 
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 
 async def main():

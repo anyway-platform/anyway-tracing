@@ -753,7 +753,7 @@ async def _awrap(
 
 
 def is_metrics_enabled() -> bool:
-    return (os.getenv("TRACELOOP_METRICS_ENABLED") or "true").lower() == "true"
+    return (os.getenv("ANYWAY_METRICS_ENABLED") or "true").lower() == "true"
 
 
 class AnthropicInstrumentor(BaseInstrumentor):

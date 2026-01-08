@@ -2,7 +2,7 @@ import asyncio
 import os
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="agno_streaming_example")
 

@@ -108,7 +108,7 @@ def test_agent_spans(exporter, test_agent):
     assert agent_span.name == "testAgent.agent"
     assert agent_span.kind == agent_span.kind.CLIENT
     assert (
-        agent_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND]
+        agent_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND]
         == TraceloopSpanKindValues.AGENT.value
     )
     assert agent_span.attributes[GenAIAttributes.GEN_AI_AGENT_NAME] == "testAgent"
@@ -188,11 +188,11 @@ def test_agent_with_function_tool_spans(exporter, function_tool_agent):
     tool_span = next(s for s in spans if s.name == "get_weather.tool")
 
     assert (
-        agent_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND]
+        agent_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND]
         == TraceloopSpanKindValues.AGENT.value
     )
     assert (
-        tool_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND]
+        tool_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND]
         == TraceloopSpanKindValues.TOOL.value
     )
     assert tool_span.kind == tool_span.kind.INTERNAL
@@ -229,7 +229,7 @@ def test_agent_with_web_search_tool_spans(exporter, web_search_tool_agent):
     # WebSearchTool doesn't create a separate tool span - it's handled differently than FunctionTool
 
     assert (
-        agent_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND]
+        agent_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND]
         == TraceloopSpanKindValues.AGENT.value
     )
 
@@ -261,7 +261,7 @@ def test_agent_with_handoff_spans(exporter, handoff_agent):
     # Verify the agent span was created successfully
     assert agent_a_span.status.status_code == StatusCode.OK
     assert (
-        agent_a_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND]
+        agent_a_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND]
         == TraceloopSpanKindValues.AGENT.value
     )
 
@@ -352,7 +352,7 @@ async def test_recipe_workflow_agent_handoffs_with_function_tools(
         if search_tool_spans:
             search_tool_span = search_tool_spans[0]
             assert (
-                search_tool_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND]
+                search_tool_span.attributes[SpanAttributes.ANYWAY_SPAN_KIND]
                 == TraceloopSpanKindValues.TOOL.value
             )
             assert search_tool_span.status.status_code == StatusCode.OK

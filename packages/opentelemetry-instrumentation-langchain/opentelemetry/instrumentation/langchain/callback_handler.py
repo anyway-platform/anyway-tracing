@@ -283,8 +283,8 @@ class TraceloopCallbackHandler(BaseCallbackHandler):
 
         token = self._safe_attach_context(span)
 
-        _set_span_attribute(span, SpanAttributes.TRACELOOP_WORKFLOW_NAME, workflow_name)
-        _set_span_attribute(span, SpanAttributes.TRACELOOP_ENTITY_PATH, entity_path)
+        _set_span_attribute(span, SpanAttributes.ANYWAY_WORKFLOW_NAME, workflow_name)
+        _set_span_attribute(span, SpanAttributes.ANYWAY_ENTITY_PATH, entity_path)
 
         # Set metadata as span attributes if available
         if metadata is not None:
@@ -326,8 +326,8 @@ class TraceloopCallbackHandler(BaseCallbackHandler):
             metadata=metadata,
         )
 
-        _set_span_attribute(span, SpanAttributes.TRACELOOP_SPAN_KIND, kind.value)
-        _set_span_attribute(span, SpanAttributes.TRACELOOP_ENTITY_NAME, entity_name)
+        _set_span_attribute(span, SpanAttributes.ANYWAY_SPAN_KIND, kind.value)
+        _set_span_attribute(span, SpanAttributes.ANYWAY_ENTITY_NAME, entity_name)
 
         return span
 
@@ -420,7 +420,7 @@ class TraceloopCallbackHandler(BaseCallbackHandler):
         )
         if not should_emit_events() and should_send_prompts():
             span.set_attribute(
-                SpanAttributes.TRACELOOP_ENTITY_INPUT,
+                SpanAttributes.ANYWAY_ENTITY_INPUT,
                 json.dumps(
                     {
                         "inputs": inputs,
@@ -451,7 +451,7 @@ class TraceloopCallbackHandler(BaseCallbackHandler):
         span = span_holder.span
         if not should_emit_events() and should_send_prompts():
             span.set_attribute(
-                SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
+                SpanAttributes.ANYWAY_ENTITY_OUTPUT,
                 json.dumps(
                     {"outputs": outputs, "kwargs": kwargs},
                     cls=CallbackFilteredJSONEncoder,
@@ -676,7 +676,7 @@ class TraceloopCallbackHandler(BaseCallbackHandler):
         )
         if not should_emit_events() and should_send_prompts():
             span.set_attribute(
-                SpanAttributes.TRACELOOP_ENTITY_INPUT,
+                SpanAttributes.ANYWAY_ENTITY_INPUT,
                 json.dumps(
                     {
                         "input_str": input_str,
@@ -705,7 +705,7 @@ class TraceloopCallbackHandler(BaseCallbackHandler):
         span = self._get_span(run_id)
         if not should_emit_events() and should_send_prompts():
             span.set_attribute(
-                SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
+                SpanAttributes.ANYWAY_ENTITY_OUTPUT,
                 json.dumps(
                     {"output": output, "kwargs": kwargs},
                     cls=CallbackFilteredJSONEncoder,

@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 from pydantic import BaseModel
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 from dotenv import load_dotenv
 
 load_dotenv()

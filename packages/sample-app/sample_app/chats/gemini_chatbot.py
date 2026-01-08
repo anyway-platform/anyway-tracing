@@ -3,9 +3,9 @@ import uuid
 from datetime import datetime
 import google.genai as genai
 from google.genai import types
-from traceloop.sdk import Traceloop
-from traceloop.sdk.associations import AssociationProperty
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.associations import AssociationProperty
+from anyway.sdk.decorators import workflow
 
 # Initialize Traceloop for observability
 traceloop = Traceloop.init(app_name="gemini_chatbot")

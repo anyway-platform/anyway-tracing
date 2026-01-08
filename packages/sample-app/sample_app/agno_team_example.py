@@ -2,8 +2,8 @@ import os
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.team import Team
-from traceloop.sdk import Traceloop
-from traceloop.sdk.decorators import workflow
+from anyway.sdk import Traceloop
+from anyway.sdk.decorators import workflow
 
 
 Traceloop.init(app_name="agno_team_example")

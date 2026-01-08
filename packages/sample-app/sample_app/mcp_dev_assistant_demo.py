@@ -14,7 +14,7 @@ from typing import Optional
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter
-from traceloop.sdk import Traceloop
+from anyway.sdk import Traceloop
 
 
 class MCPDevAssistantDemo:
