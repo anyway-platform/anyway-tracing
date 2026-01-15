@@ -27,13 +27,20 @@ def create_joke():
 
 ## Configuration
 
-### Authentication
+The SDK is built on top of OpenTelemetry and supports exporting traces to any OTEL-compatible collector.
 
-Choose one of the following methods to set your API key:
+The protocol is determined by the URL format:
+- Without `http://` or `https://` prefix → gRPC (e.g., `localhost:4317`)
+- With `http://` or `https://` prefix → HTTP (e.g., `http://localhost:4318`)
 
-**Option 1: Environment Variable**
+### Connecting to Anyway Collector
+
+Configure the SDK endpoint and authentication using one of the following methods.
+
+**Option 1: Environment Variables**
 
 ```bash
+export TRACELOOP_BASE_URL=localhost:4317
 export TRACELOOP_HEADERS="Authorization=Bearer%20<your-api-key>"
 ```
 
@@ -41,6 +48,7 @@ Note: The space between `Bearer` and the key must be URL-encoded as `%20`.
 
 Example:
 ```bash
+export TRACELOOP_BASE_URL=localhost:4317
 export TRACELOOP_HEADERS="Authorization=Bearer%20sk_test_mncd5s5tQQJLuLNhRoXcYuNuptoOPuAY"
 ```
 
@@ -51,14 +59,39 @@ from anyway.sdk import Traceloop
 Traceloop.init(app_name="my_app")
 ```
 
-**Option 2: Pass Headers Directly**
+**Option 2: Pass Directly to Init**
 
 ```python
 from anyway.sdk import Traceloop
 
 Traceloop.init(
     app_name="my_app",
+    api_endpoint="localhost:4317",
     headers={"Authorization": "Bearer <your-api-key>"}
+)
+```
+
+### OpenTelemetry Collector
+
+The SDK can export traces to any OpenTelemetry Collector.
+
+**Using Environment Variables**
+
+```bash
+export TRACELOOP_BASE_URL=<your-collector-endpoint>
+```
+
+**Using a Custom Exporter**
+
+```python
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from anyway.sdk import Traceloop
+
+exporter = OTLPSpanExporter(endpoint="localhost:4317")
+
+Traceloop.init(
+    app_name="my_app",
+    exporter=exporter
 )
 ```
 
