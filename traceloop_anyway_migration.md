@@ -322,17 +322,17 @@ If you only need to update the anyway-sdk version:
 
 1. **`.cz.toml`** (line 7):
    ```toml
-   version = "0.0.4"
+   version = "0.0.5"
    ```
 
 2. **`packages/anyway-sdk/pyproject.toml`**:
    ```toml
-   version = "0.0.4"
+   version = "0.0.5"
    ```
 
 3. **`packages/anyway-sdk/anyway/sdk/version.py`**:
    ```python
-   __version__ = "0.0.4"
+   __version__ = "0.0.5"
    ```
 
 ## Notes
