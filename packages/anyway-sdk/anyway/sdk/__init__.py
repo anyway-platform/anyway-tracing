@@ -135,6 +135,11 @@ class Traceloop:
         if pricing_enabled:
             try:
                 pricing_data = load_pricing(pricing_json_path)
+                if pricing_json_path:
+                    print(
+                        Fore.GREEN
+                        + f"Traceloop using custom pricing from {pricing_json_path}"
+                    )
                 pricing_calculator = PricingCalculator(pricing_data)
 
                 # Wrap existing callback or create new one
