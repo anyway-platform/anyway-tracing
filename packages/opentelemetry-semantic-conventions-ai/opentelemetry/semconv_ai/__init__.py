@@ -62,6 +62,11 @@ class Meters:
 
 
 class SpanAttributes:
+    # GenAI Usage Cost Attributes
+    GEN_AI_USAGE_COST = "gen_ai.usage.cost"
+    GEN_AI_USAGE_INPUT_COST = "gen_ai.usage.input_cost"
+    GEN_AI_USAGE_OUTPUT_COST = "gen_ai.usage.output_cost"
+
     # GenAI Usage Cache Attributes (missing from incubating semantic conventions)
     GEN_AI_USAGE_CACHE_CREATION_INPUT_TOKENS = "gen_ai.usage.cache_creation_input_tokens"
     GEN_AI_USAGE_CACHE_READ_INPUT_TOKENS = "gen_ai.usage.cache_read_input_tokens"

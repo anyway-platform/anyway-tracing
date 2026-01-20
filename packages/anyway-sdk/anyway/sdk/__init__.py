@@ -1,8 +1,9 @@
+import logging
 import os
 import sys
 from pathlib import Path
 
-from typing import Callable, List, Optional, Set, Union
+from typing import Callable, Dict, List, Optional, Set, Union
 from colorama import Fore
 from opentelemetry.sdk.trace import SpanProcessor, ReadableSpan
 from opentelemetry.sdk.trace.sampling import Sampler
@@ -29,9 +30,9 @@ from anyway.sdk.tracing.tracing import (
     set_association_properties,
     set_external_prompt_tracing_context,
 )
-from typing import Dict
 from anyway.sdk.client.client import Client
 from anyway.sdk.associations.associations import AssociationProperty
+from anyway.sdk.pricing import PricingCalculator, load_pricing
 
 
 class Traceloop:
@@ -69,6 +70,8 @@ class Traceloop:
         block_instruments: Optional[Set[Instruments]] = None,
         image_uploader: Optional[ImageUploader] = None,
         span_postprocess_callback: Optional[Callable[[ReadableSpan], None]] = None,
+        pricing_enabled: bool = True,
+        pricing_json_path: Optional[str] = None,
     ) -> Optional[Client]:
         if not enabled:
             TracerWrapper.set_disabled(True)
@@ -127,6 +130,29 @@ class Traceloop:
             }
 
         print(Fore.RESET)
+
+        # Initialize pricing callback if enabled
+        if pricing_enabled:
+            try:
+                pricing_data = load_pricing(pricing_json_path)
+                if pricing_json_path:
+                    print(
+                        Fore.GREEN
+                        + f"Traceloop using custom pricing from {pricing_json_path}"
+                    )
+                pricing_calculator = PricingCalculator(pricing_data)
+
+                # Wrap existing callback or create new one
+                original_callback = span_postprocess_callback
+
+                def pricing_callback(span: ReadableSpan) -> None:
+                    if original_callback:
+                        original_callback(span)
+                    pricing_calculator.add_cost_attributes(span)
+
+                span_postprocess_callback = pricing_callback
+            except Exception as e:
+                logging.warning(f"Failed to initialize pricing: {e}")
 
         # Tracer init
         resource_attributes.update({SERVICE_NAME: app_name})
