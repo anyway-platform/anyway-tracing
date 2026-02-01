@@ -2,6 +2,11 @@
 
 > Anyway's Python SDK allows you to easily start monitoring and debugging your LLM execution.
 
+## Main Contributor
+
+- Jims Young
+
+
 ## Overview
 
 Tracing is done in a non-intrusive way, built on top of OpenTelemetry. You can choose to export the traces to your existing observability stack.
@@ -132,13 +137,6 @@ The `name` parameter is optional - if not provided, it defaults to the function 
 - Pinecone
 - Qdrant
 - Weaviate
-- And more...
-
-### Frameworks
-
-- LangChain
-- LlamaIndex
-- CrewAI
 - And more...
 
 ## License
