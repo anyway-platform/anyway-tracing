@@ -299,7 +299,8 @@ def init_spans_exporter(api_endpoint: str, headers: Dict[str, str]) -> SpanExpor
         - http:// or https:// → HTTP exporter
         - grpc:// → gRPC exporter (insecure)
         - grpcs:// → gRPC exporter (secure/TLS)
-        - No scheme → gRPC exporter (insecure, for backward compatibility)
+        - No scheme → gRPC exporter (secure/TLS by default)
+            - unless TRACELOOP_GRPC_INSECURE=true, then insecure
 
     Args:
         api_endpoint: The endpoint URL (with or without scheme)
@@ -309,6 +310,7 @@ def init_spans_exporter(api_endpoint: str, headers: Dict[str, str]) -> SpanExpor
         SpanExporter: Configured HTTP or gRPC exporter
     """
     parsed = urlparse(api_endpoint.strip())
+    grpc_headers = {key.lower(): value for key, value in headers.items()}
 
     match parsed.scheme.lower():
         case "http" | "https":
@@ -320,16 +322,16 @@ def init_spans_exporter(api_endpoint: str, headers: Dict[str, str]) -> SpanExpor
             return HTTPExporter(endpoint=endpoint, headers=headers)
         case "grpc":
             return GRPCExporter(
-                endpoint=parsed.netloc, headers=headers, insecure=True
+                endpoint=parsed.netloc, headers=grpc_headers, insecure=True
             )
         case "grpcs":
             return GRPCExporter(
-                endpoint=parsed.netloc, headers=headers, insecure=False
+                endpoint=parsed.netloc, headers=grpc_headers, insecure=False
             )
         case _:
-            # No scheme → default to insecure gRPC for backward compatibility
+            insecure = (os.getenv("TRACELOOP_GRPC_INSECURE") or "false").lower() == "true"
             return GRPCExporter(
-                endpoint=api_endpoint.strip(), headers=headers, insecure=True
+                endpoint=api_endpoint.strip(), headers=grpc_headers, insecure=insecure
             )
 
 

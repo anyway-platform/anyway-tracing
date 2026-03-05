@@ -43,7 +43,7 @@ class TestInitSpansExporter:
         ("grpcs://localhost:4317", "localhost:4317", False),
         ("GRPCS://host:4317", "host:4317", False),
         ("  grpc://localhost:4317  ", "localhost:4317", True),  # whitespace stripped
-        ("localhost:4317", "localhost:4317", True),  # no scheme = insecure gRPC
+        ("localhost:4317", "localhost:4317", False),  # no scheme = secure gRPC
     ])
     def test_grpc_schemes(self, endpoint, expected_endpoint, insecure):
         from anyway.sdk.tracing.tracing import init_spans_exporter
@@ -52,6 +52,46 @@ class TestInitSpansExporter:
         with patch.object(OTLPSpanExporter, "__init__", return_value=None) as mock:
             init_spans_exporter(endpoint, {})
             mock.assert_called_once_with(endpoint=expected_endpoint, headers={}, insecure=insecure)
+
+    def test_no_scheme_insecure_when_env_true(self, monkeypatch):
+        from anyway.sdk.tracing.tracing import init_spans_exporter
+        from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+
+        monkeypatch.setenv("TRACELOOP_GRPC_INSECURE", "true")
+
+        with patch.object(OTLPSpanExporter, "__init__", return_value=None) as mock:
+            init_spans_exporter("localhost:4317", {})
+            mock.assert_called_once_with(
+                endpoint="localhost:4317",
+                headers={},
+                insecure=True,
+            )
+
+    def test_no_scheme_defaults_to_secure_grpc(self):
+        from anyway.sdk.tracing.tracing import init_spans_exporter
+        from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+
+        with patch.object(OTLPSpanExporter, "__init__", return_value=None) as mock:
+            init_spans_exporter("localhost:4317", {})
+            mock.assert_called_once_with(
+                endpoint="localhost:4317",
+                headers={},
+                insecure=False,
+            )
+
+    def test_grpc_headers_are_lowercased(self):
+        from anyway.sdk.tracing.tracing import init_spans_exporter
+        from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+
+        headers = {"Authorization": "Bearer token", "X-Custom-Header": "value"}
+
+        with patch.object(OTLPSpanExporter, "__init__", return_value=None) as mock:
+            init_spans_exporter("grpc://localhost:4317", headers)
+            mock.assert_called_once_with(
+                endpoint="localhost:4317",
+                headers={"authorization": "Bearer token", "x-custom-header": "value"},
+                insecure=True,
+            )
 
 
 @pytest.mark.vcr
