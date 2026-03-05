@@ -29,71 +29,61 @@ def create_joke():
 
 The SDK is built on top of OpenTelemetry and supports exporting traces to any OTEL-compatible collector.
 
-The protocol is determined by the URL format:
-- Without `http://` or `https://` prefix → gRPC (e.g., `localhost:4317`)
-- With `http://` or `https://` prefix → HTTP (e.g., `http://localhost:4318`)
+Protocol selection is determined by `api_endpoint`:
+- `http://` or `https://` -> OTLP HTTP exporter (`/v1/traces` path is appended when needed)
+- `grpc://` -> OTLP gRPC exporter (`insecure=True`)
+- `grpcs://` -> OTLP gRPC exporter (`insecure=False`, TLS)
+- no scheme (for example `collector.example.com:4317`) -> OTLP gRPC exporter with secure default (`insecure=False`)
 
-### Connecting to Anyway Collector
+### Environment Variables
 
-Configure the SDK endpoint and authentication using one of the following methods.
+`TRACELOOP_*` is canonical. `ANYWAY_*` aliases are also supported for compatibility.
 
-**Option 1: Environment Variables**
+- `TRACELOOP_BASE_URL` (alias: `ANYWAY_BASE_URL`)
+- `TRACELOOP_API_KEY` (alias: `ANYWAY_API_KEY`)
+- `TRACELOOP_HEADERS` (alias: `ANYWAY_HEADERS`)
+- `TRACELOOP_GRPC_INSECURE` (alias: `ANYWAY_GRPC_INSECURE`) for explicit local/dev opt-out of secure no-scheme gRPC defaults
+
+### Anyway Cloud Example
 
 ```bash
-export TRACELOOP_BASE_URL=localhost:4317
-export TRACELOOP_HEADERS="Authorization=Bearer%20<your-api-key>"
+export TRACELOOP_BASE_URL=https://api.traceloop.com
+export TRACELOOP_API_KEY=sk_live_xxx
 ```
 
-Note: The space between `Bearer` and the key must be URL-encoded as `%20`.
-
-Example:
-```bash
-export TRACELOOP_BASE_URL=localhost:4317
-export TRACELOOP_HEADERS="Authorization=Bearer%20sk_test_mncd5s5tQQJLuLNhRoXcYuNuptoOPuAY"
-```
-
-Then initialize the SDK:
 ```python
 from anyway.sdk import Traceloop
 
 Traceloop.init(app_name="my_app")
 ```
 
-**Option 2: Pass Directly to Init**
+### Custom OTLP Collector Example
 
-```python
-from anyway.sdk import Traceloop
-
-Traceloop.init(
-    app_name="my_app",
-    api_endpoint="localhost:4317",
-    headers={"Authorization": "Bearer <your-api-key>"}
-)
-```
-
-### OpenTelemetry Collector
-
-The SDK can export traces to any OpenTelemetry Collector.
-
-**Using Environment Variables**
+Secure gRPC collector:
 
 ```bash
-export TRACELOOP_BASE_URL=<your-collector-endpoint>
+export TRACELOOP_BASE_URL=grpcs://otel-collector.example.com:4317
+export TRACELOOP_HEADERS="Authorization=Bearer%20<token>"
 ```
 
-**Using a Custom Exporter**
+Local/dev collector without TLS (no scheme endpoint + explicit opt-out):
+
+```bash
+export TRACELOOP_BASE_URL=localhost:4317
+export TRACELOOP_GRPC_INSECURE=true
+```
 
 ```python
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from anyway.sdk import Traceloop
 
-exporter = OTLPSpanExporter(endpoint="localhost:4317")
-
-Traceloop.init(
-    app_name="my_app",
-    exporter=exporter
-)
+Traceloop.init(app_name="my_app")
 ```
+
+### Migration Notes
+
+- Endpoints without a scheme now default to secure gRPC (`insecure=False`).
+- If you rely on insecure local gRPC with a no-scheme endpoint (for example `localhost:4317`), set `TRACELOOP_GRPC_INSECURE=true` (or `ANYWAY_GRPC_INSECURE=true`).
+- Existing `http://`/`https://` and `grpc://`/`grpcs://` behavior remains unchanged.
 
 ## Decorators
 

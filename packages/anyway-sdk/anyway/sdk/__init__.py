@@ -35,6 +35,14 @@ from anyway.sdk.associations.associations import AssociationProperty
 from anyway.sdk.pricing import PricingCalculator, load_pricing
 
 
+def _get_env(*names: str) -> Optional[str]:
+    for name in names:
+        value = os.getenv(name)
+        if value is not None and value != "":
+            return value
+    return None
+
+
 class Traceloop:
     AUTO_CREATED_KEY_PATH = str(
         Path.home() / ".cache" / "traceloop" / "auto_created_key"
@@ -82,8 +90,8 @@ class Traceloop:
             )
             return
 
-        api_endpoint = os.getenv("TRACELOOP_BASE_URL") or api_endpoint
-        api_key = os.getenv("TRACELOOP_API_KEY") or api_key
+        api_endpoint = _get_env("TRACELOOP_BASE_URL", "ANYWAY_BASE_URL") or api_endpoint
+        api_key = _get_env("TRACELOOP_API_KEY", "ANYWAY_API_KEY") or api_key
         Traceloop.__app_name = app_name
 
         if not is_tracing_enabled():
@@ -95,7 +103,7 @@ class Traceloop:
         if exporter or processor:
             print(Fore.GREEN + "Traceloop exporting traces to a custom exporter")
 
-        headers = os.getenv("TRACELOOP_HEADERS") or headers
+        headers = _get_env("TRACELOOP_HEADERS", "ANYWAY_HEADERS") or headers
 
         if isinstance(headers, str):
             headers = parse_env_headers(headers)
@@ -179,9 +187,14 @@ class Traceloop:
         if metrics_disabled_by_config or custom_trace_without_custom_metrics:
             print(Fore.YELLOW + "Metrics are disabled" + Fore.RESET)
         else:
-            metrics_endpoint = os.getenv("TRACELOOP_METRICS_ENDPOINT") or api_endpoint
+            metrics_endpoint = (
+                _get_env("TRACELOOP_METRICS_ENDPOINT", "ANYWAY_METRICS_ENDPOINT")
+                or api_endpoint
+            )
             metrics_headers = (
-                os.getenv("TRACELOOP_METRICS_HEADERS") or metrics_headers or headers
+                _get_env("TRACELOOP_METRICS_HEADERS", "ANYWAY_METRICS_HEADERS")
+                or metrics_headers
+                or headers
             )
             if metrics_exporter or processor:
                 print(Fore.GREEN + "Traceloop exporting metrics to a custom exporter")
@@ -192,9 +205,14 @@ class Traceloop:
             Traceloop.__metrics_wrapper = MetricsWrapper(exporter=metrics_exporter)
 
         if is_logging_enabled() and (logging_exporter or not exporter):
-            logging_endpoint = os.getenv("TRACELOOP_LOGGING_ENDPOINT") or api_endpoint
+            logging_endpoint = (
+                _get_env("TRACELOOP_LOGGING_ENDPOINT", "ANYWAY_LOGGING_ENDPOINT")
+                or api_endpoint
+            )
             logging_headers = (
-                os.getenv("TRACELOOP_LOGGING_HEADERS") or logging_headers or headers
+                _get_env("TRACELOOP_LOGGING_HEADERS", "ANYWAY_LOGGING_HEADERS")
+                or logging_headers
+                or headers
             )
             if logging_exporter or processor:
                 print(Fore.GREEN + "Traceloop exporting logs to a custom exporter")
@@ -265,12 +283,15 @@ class Traceloop:
         from anyway.sdk.tracing.tracing import get_default_span_processor
         if headers is None:
             if api_key is None:
-                api_key = os.getenv("TRACELOOP_API_KEY")
+                api_key = _get_env("TRACELOOP_API_KEY", "ANYWAY_API_KEY")
             headers = {
                 "Authorization": f"Bearer {api_key}",
             }
         if api_endpoint is None:
-            api_endpoint = os.getenv("TRACELOOP_BASE_URL") or "https://api.traceloop.com"
+            api_endpoint = (
+                _get_env("TRACELOOP_BASE_URL", "ANYWAY_BASE_URL")
+                or "https://api.traceloop.com"
+            )
         return get_default_span_processor(disable_batch, api_endpoint, headers, exporter)
 
     @staticmethod
