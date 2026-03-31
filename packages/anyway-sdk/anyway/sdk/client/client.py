@@ -36,7 +36,7 @@ class Client:
         self,
         api_key: str,
         app_name: str = sys.argv[0],
-        api_endpoint: str = "https://api.traceloop.com",
+        api_endpoint: str = "https://collector.anyway.sh",
     ):
         """
         Initialize a new Traceloop client.
@@ -44,13 +44,13 @@ class Client:
         Args:
             api_key (str): Your Traceloop API key
             app_name (Optional[str], optional): The name of your application. Defaults to sys.argv[0].
-            api_endpoint (Optional[str], optional): Custom API endpoint. Defaults to https://api.traceloop.com.
+            api_endpoint (Optional[str], optional): Custom API endpoint. Defaults to https://collector.anyway.sh.
         """
         if not api_key or not api_key.strip():
             raise ValueError("API key is required")
 
         self.app_name = app_name
-        self.api_endpoint = api_endpoint or "https://api.traceloop.com"
+        self.api_endpoint = api_endpoint or "https://collector.anyway.sh"
         self.api_key = api_key
         self._http = HTTPClient(
             base_url=self.api_endpoint, api_key=self.api_key, version=__version__
@@ -66,7 +66,7 @@ class Client:
         )
         self.user_feedback = UserFeedback(self._http, self.app_name)
         self.datasets = Datasets(self._http)
-        experiment_slug = os.getenv("TRACELOOP_EXP_SLUG")
+        experiment_slug = os.getenv("ANYWAY_EXP_SLUG")
         # TODO: Fix type - Experiment constructor should accept Optional[str]
         self.experiment = Experiment(self._http, self._async_http, experiment_slug)  # type: ignore[arg-type]
         self.associations = Associations()

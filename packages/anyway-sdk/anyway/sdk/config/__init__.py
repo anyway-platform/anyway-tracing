@@ -2,7 +2,7 @@ import os
 
 
 def is_tracing_enabled() -> bool:
-    return (os.getenv("TRACELOOP_TRACING_ENABLED") or "true").lower() == "true"
+    return (os.getenv("ANYWAY_TRACING_ENABLED") or "true").lower() == "true"
 
 
 def is_content_tracing_enabled() -> bool:
@@ -14,4 +14,4 @@ def is_metrics_enabled() -> bool:
 
 
 def is_logging_enabled() -> bool:
-    return (os.getenv("TRACELOOP_LOGGING_ENABLED") or "false").lower() == "true"
+    return (os.getenv("ANYWAY_LOGGING_ENABLED") or "false").lower() == "true"

@@ -202,7 +202,7 @@ class TracerWrapper(object):
         if hasattr(cls, "instance"):
             return True
 
-        if (os.getenv("TRACELOOP_SUPPRESS_WARNINGS") or "false").lower() == "true":
+        if (os.getenv("ANYWAY_SUPPRESS_WARNINGS") or "false").lower() == "true":
             return False
 
         print(
