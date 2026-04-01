@@ -15,7 +15,7 @@ def client_with_exporter():
     client = Traceloop.init(
         app_name="test_associations",
         api_key="test-api-key",
-        api_endpoint="https://api.traceloop.com",
+        api_endpoint="https://collector.anyway.sh",
         disable_batch=True,
         # NO exporter or processor - so client gets created
     )
