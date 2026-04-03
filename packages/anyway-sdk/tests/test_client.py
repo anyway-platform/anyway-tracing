@@ -10,7 +10,7 @@ def test_client_initialization():
 
     assert client.app_name == "test-app"
     assert client.api_key == "test-key"
-    assert client.api_endpoint == "https://api.traceloop.com"
+    assert client.api_endpoint == "https://collector.anyway.sh"
     assert isinstance(client._http, HTTPClient)
 
 
