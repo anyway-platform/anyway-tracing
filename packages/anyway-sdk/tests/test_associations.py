@@ -91,8 +91,9 @@ def test_associations_create_multiple(client_with_exporter):
         return
 
     client.associations.set([
-        (AssociationProperty.CUSTOMER_ID, "customer-456"),
+        (AssociationProperty.USER_ID, "user-456"),
         (AssociationProperty.SESSION_ID, "session-789"),
+        (AssociationProperty.CUSTOMER_ID, "customer-999"),
     ])
     test_workflow()
 
@@ -107,18 +108,24 @@ def test_associations_create_multiple(client_with_exporter):
 
     # Check all associations are present
     assert workflow_span.attributes[
-        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.customer_id"
-    ] == "customer-456"
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
+    ] == "user-456"
     assert workflow_span.attributes[
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
     ] == "session-789"
+    assert workflow_span.attributes[
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.customer_id"
+    ] == "customer-999"
 
     assert task_span.attributes[
-        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.customer_id"
-    ] == "customer-456"
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
+    ] == "user-456"
     assert task_span.attributes[
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
     ] == "session-789"
+    assert task_span.attributes[
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.customer_id"
+    ] == "customer-999"
 
 
 def test_associations_within_workflow(client_with_exporter):
@@ -129,7 +136,7 @@ def test_associations_within_workflow(client_with_exporter):
     def test_workflow():
         client.associations.set([
             (AssociationProperty.SESSION_ID, "conv-abc"),
-            (AssociationProperty.CUSTOMER_ID, "customer-xyz"),
+            (AssociationProperty.USER_ID, "user-xyz"),
         ])
         return test_task()
 
@@ -153,15 +160,15 @@ def test_associations_within_workflow(client_with_exporter):
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
     ] == "conv-abc"
     assert workflow_span.attributes[
-        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.customer_id"
-    ] == "customer-xyz"
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
+    ] == "user-xyz"
 
     assert task_span.attributes[
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
     ] == "conv-abc"
     assert task_span.attributes[
-        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.customer_id"
-    ] == "customer-xyz"
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
+    ] == "user-xyz"
 
 
 def test_all_association_properties(client_with_exporter):
@@ -173,8 +180,10 @@ def test_all_association_properties(client_with_exporter):
         return
 
     client.associations.set([
-        (AssociationProperty.CUSTOMER_ID, "customer-2"),
-        (AssociationProperty.SESSION_ID, "session-4"),
+        (AssociationProperty.CUSTOMER_ID, "customer-1"),
+        (AssociationProperty.USER_ID, "user-2"),
+        (AssociationProperty.SESSION_ID, "session-3"),
+        (AssociationProperty.ORDER_ID, "order-4"),
     ])
     test_workflow()
 
@@ -183,7 +192,13 @@ def test_all_association_properties(client_with_exporter):
 
     assert workflow_span.attributes[
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.customer_id"
-    ] == "customer-2"
+    ] == "customer-1"
+    assert workflow_span.attributes[
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
+    ] == "user-2"
     assert workflow_span.attributes[
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
-    ] == "session-4"
+    ] == "session-3"
+    assert workflow_span.attributes[
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.order_id"
+    ] == "order-4"

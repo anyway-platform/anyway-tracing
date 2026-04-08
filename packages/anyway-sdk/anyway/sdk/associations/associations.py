@@ -18,13 +18,19 @@ class AssociationProperty(str, Enum):
     Add order context::
 
         Traceloop.set_association_properties({
+            AssociationProperty.USER_ID: "user-123",
             AssociationProperty.CUSTOMER_ID: "CUS_a1b2c3d4e5f6",
             AssociationProperty.ORDER_ID: "ORD_x7y8z9",
         })
     """
 
-    #: Your customer's unique identifier. Use this to filter and group traces by customer.
+    #: Anyway platform customer identifier (CUS_xxx format).
+    #: Obtained from the Anyway Customers API or order system.
+    #: Use this to link traces to Anyway billing, orders, and revenue attribution.
     CUSTOMER_ID = "customer_id"
+    #: Your application's internal user identifier (from your own auth system).
+    #: Use this to filter and group traces by user in your app.
+    USER_ID = "user_id"
     #: A session or conversation identifier. Use this to correlate traces within a single session.
     SESSION_ID = "session_id"
     #: An order or transaction identifier. Use this to trace a specific business transaction.
@@ -52,7 +58,7 @@ class Associations:
 
             # Multiple associations
             traceloop.associations.set([
-                (AssociationProperty.CUSTOMER_ID, "customer-456"),
+                (AssociationProperty.USER_ID, "user-456"),
                 (AssociationProperty.SESSION_ID, "session-789")
             ])
         """
