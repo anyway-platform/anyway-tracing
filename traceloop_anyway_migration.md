@@ -241,6 +241,15 @@ pip install anyway-sdk  # Pulls opentelemetry-instrumentation-* from PyPI
 
 Before publishing to production PyPI, test with TestPyPI first:
 
+**0. Install Poetry (if not already installed):**
+```bash
+# macOS
+brew install poetry
+
+# Or via the official installer (any OS)
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
 **1. Configure TestPyPI repository:**
 ```bash
 poetry config repositories.testpypi https://test.pypi.org/legacy/
