@@ -180,10 +180,10 @@ def test_all_association_properties(client_with_exporter):
         return
 
     client.associations.set([
-        (AssociationProperty.SESSION_ID, "conv-1"),
-        (AssociationProperty.CUSTOMER_ID, "customer-2"),
-        (AssociationProperty.USER_ID, "user-3"),
-        (AssociationProperty.SESSION_ID, "session-4"),
+        (AssociationProperty.CUSTOMER_ID, "customer-1"),
+        (AssociationProperty.USER_ID, "user-2"),
+        (AssociationProperty.SESSION_ID, "session-3"),
+        (AssociationProperty.ORDER_ID, "order-4"),
     ])
     test_workflow()
 
@@ -192,10 +192,13 @@ def test_all_association_properties(client_with_exporter):
 
     assert workflow_span.attributes[
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.customer_id"
-    ] == "customer-2"
+    ] == "customer-1"
     assert workflow_span.attributes[
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.user_id"
-    ] == "user-3"
+    ] == "user-2"
     assert workflow_span.attributes[
         f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.session_id"
-    ] == "session-4"
+    ] == "session-3"
+    assert workflow_span.attributes[
+        f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.order_id"
+    ] == "order-4"
